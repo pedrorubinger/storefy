@@ -1,15 +1,14 @@
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
-import { styles } from "@/app/(home)/styles";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { HomeHeader } from "@/components/HomeHeader";
+import { styles } from "@/styles/homeStyles";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <ThemedView>
-        <ThemedText type="title">Welcome!</ThemedText>
-      </ThemedView>
+      <View style={styles.content}>
+        <HomeHeader name="Pedro" />
+      </View>
     </SafeAreaView>
   );
 }
