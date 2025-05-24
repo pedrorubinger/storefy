@@ -22,10 +22,12 @@ const Theme = {
       grey700: "#484848",
 
       green400: "#29B985",
+      green350: "#669c82",
 
       koamaru100: "#31385b",
       koamaru200: "#373f66",
       koamaru300: "#31385b",
+      koamaru400: "#2f4858",
 
       orange100: "#F1C27B",
       orange200: "#FFB07F",
