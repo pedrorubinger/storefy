@@ -1,5 +1,6 @@
-import { getTheme } from "@/helpers/Theme";
 import { StyleSheet } from "react-native";
+
+import { getTheme } from "@/constants/Theme";
 
 const { colors } = getTheme();
 

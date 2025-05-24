@@ -1,4 +1,4 @@
-import { getTheme } from "@/helpers/Theme";
+import { getTheme } from "@/constants/Theme";
 
 const { colors } = getTheme();
 
