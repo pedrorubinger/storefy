@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from "react-native";
 
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";
-import { styles } from "@/styles/homeStyles";
+import { styles } from "@/styles/home.styles";
 
 const { colors } = getTheme();
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const HomeHeader: React.FC<Props> = ({ name }) => {
-  const MAX_NAME_LENGTH = 11;
+  const MAX_NAME_LENGTH = 15;
   const label =
     name.length > MAX_NAME_LENGTH
       ? `${name.slice(0, MAX_NAME_LENGTH)}...`

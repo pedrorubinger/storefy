@@ -7,7 +7,7 @@ const Theme = {
     light: {
       primary: "#249c70",
 
-      background: "#fff",
+      background: "#fbfcfa",
 
       black: "#1A1A1A",
 

@@ -16,7 +16,7 @@ export const Typography: React.FC<Props> = ({
   children,
   font = "default400",
   size = "md",
-  color = "primary",
+  color = "grey500",
   ...rest
 }) => {
   const theme = useTheme();

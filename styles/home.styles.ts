@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
+    marginTop: spacing.xs,
     paddingHorizontal: spacing.lg,
   },
   homeHeaderContainer: {
@@ -21,5 +22,8 @@ export const styles = StyleSheet.create({
     borderRadius: radius.md,
     backgroundColor: colors.green350,
     padding: spacing.sm,
+  },
+  searchContainer: {
+    marginTop: spacing.xl,
   },
 });
