@@ -16,7 +16,7 @@ export function ThemedText({
   type = "default",
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor("text");
+  const color = useThemeColor("grey700");
 
   return (
     <Text
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   link: {
     lineHeight: spacing.xl,
     fontSize: fontSizes.md,
-    color: colors.link,
+    color: colors.blue80,
     fontFamily: fonts.default300,
   },
 });
