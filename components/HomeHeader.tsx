@@ -25,7 +25,7 @@ export const HomeHeader: React.FC<Props> = ({ name }) => {
         <Typography color="grey500" size="lg">
           Hello,
         </Typography>
-        <Typography color="primary" font="default700" size="xxl">
+        <Typography color="primary" font="default700" size="xl">
           {label}
         </Typography>
       </View>
