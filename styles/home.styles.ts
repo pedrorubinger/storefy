@@ -25,7 +25,13 @@ export const styles = StyleSheet.create({
     padding: spacing.sm,
   },
   searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: spacing.xl,
+    gap: spacing.md,
+  },
+  searchInputContainer: {
+    flex: 1,
   },
   productsHeader: {
     marginTop: spacing.lg,

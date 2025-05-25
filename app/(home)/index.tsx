@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
@@ -56,7 +56,13 @@ export default function HomeScreen() {
         <HomeHeader name="Pedro Henrique" />
 
         <View style={styles.searchContainer}>
-          <Input placeholder="Search" />
+          <View style={styles.searchInputContainer}>
+            <Input placeholder="Search" />
+          </View>
+
+          <TouchableOpacity style={styles.categoryFilterBtn}>
+            <Ionicons name="filter" size={24} color={colors.white} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.productsHeader}>
@@ -65,9 +71,9 @@ export default function HomeScreen() {
           </Typography>
 
           <Button
-            size="xs"
+            size="sm"
             backgroundColor="white"
-            color="grey500"
+            color="grey700"
             borderColor="grey100"
             font="default600"
             icon={
@@ -75,7 +81,7 @@ export default function HomeScreen() {
                 name="chevron-down"
                 size={12}
                 style={styles.sortByIcon}
-                color={colors.grey500}
+                color={colors.grey700}
               />
             }
             style={styles.sortByBtn}

@@ -1,6 +1,5 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";
@@ -29,10 +28,6 @@ export const HomeHeader: React.FC<Props> = ({ name }) => {
           {label}
         </Typography>
       </View>
-
-      <TouchableOpacity style={styles.categoryFilterBtn}>
-        <Ionicons name="filter" size={20} color={colors.white} />
-      </TouchableOpacity>
     </View>
   );
 };
