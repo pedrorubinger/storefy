@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
         <View style={styles.searchContainer}>
           <View style={styles.searchInputContainer}>
-            <Input placeholder="Search" />
+            <Input placeholder="Search" size="sm" />
           </View>
         </View>
 
@@ -77,7 +77,7 @@ export default function HomeScreen() {
           </Typography>
 
           <Button
-            size="sm"
+            size="xs"
             backgroundColor="primary"
             color="white"
             borderColor="grey100"

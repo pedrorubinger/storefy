@@ -20,6 +20,18 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: spacing.md,
   },
+  profileContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  notificationBtn: {
+    borderRadius: radius.round,
+    borderWidth: 1,
+    borderColor: colors.grey100,
+    backgroundColor: colors.white,
+    padding: spacing.sm,
+  },
   profileFilterBtn: {
     width: 45,
     height: 45,
@@ -44,7 +56,6 @@ export const styles = StyleSheet.create({
   sortByBtn: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-    borderRadius: radius.lg,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

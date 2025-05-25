@@ -9,6 +9,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm + 4,
-    borderRadius: radius.md,
+    borderRadius: radius.round,
   },
 });
