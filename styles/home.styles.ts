@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   productsHeader: {
     marginTop: spacing.lg,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
