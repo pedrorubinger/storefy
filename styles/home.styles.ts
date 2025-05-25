@@ -6,6 +6,7 @@ const { colors, radius, spacing } = getTheme();
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: colors.background,
   },
   content: {
@@ -28,15 +29,15 @@ export const styles = StyleSheet.create({
   },
   productsHeader: {
     marginTop: spacing.lg,
-    marginBottom: spacing.md,
+    marginBottom: spacing.lg,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
   sortByBtn: {
-    paddingHorizontal: spacing.sm + 4,
+    paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-    borderRadius: radius.md,
+    borderRadius: radius.lg,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -45,7 +46,7 @@ export const styles = StyleSheet.create({
     marginLeft: spacing.xs,
   },
   productsList: {
-    marginVertical: spacing.md,
+    paddingBottom: spacing.xl,
     gap: spacing.lg,
   },
 });

@@ -7,7 +7,7 @@ const theme = getTheme();
 export const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.white,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     borderWidth: 1,
     borderColor: theme.colors.grey100,
 
@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     paddingVertical: theme.spacing.md,
   },
   thumbnail: {
-    width: 160,
-    height: 160,
+    width: 120,
+    height: 120,
     borderRadius: theme.radius.sm,
   },
   textContainer: {
