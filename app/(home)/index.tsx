@@ -1,6 +1,7 @@
-import { SafeAreaView, View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 
 import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { HomeHeader } from "@/components/HomeHeader";
 import { Input } from "@/components/Input";
 import { Typography } from "@/components/Typography";
@@ -9,6 +10,37 @@ import { styles } from "@/styles/home.styles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { colors } = getTheme();
+
+const products = [
+  {
+    id: "1",
+    title: "Awesome Product 1",
+    price: "$29.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+  },
+  {
+    id: "2",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "3",
+    title: "Awesome Product 1",
+    price: "$29.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+  },
+  {
+    id: "4",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+];
 
 export default function HomeScreen() {
   return (
@@ -44,6 +76,20 @@ export default function HomeScreen() {
             Sort by
           </Button>
         </View>
+
+        <FlatList
+          data={products}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={styles.productsList}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              price={item.price}
+              thumbnail={item.thumbnail}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </SafeAreaView>
   );
