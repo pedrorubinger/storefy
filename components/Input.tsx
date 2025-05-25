@@ -37,7 +37,7 @@ export const Input: React.FC<InputProps> = ({
         },
         style,
       ]}
-      placeholderTextColor={theme.colors["grey300"]}
+      placeholderTextColor={theme.colors["grey500"]}
       {...rest}
     />
   );
