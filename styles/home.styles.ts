@@ -70,4 +70,9 @@ export const styles = StyleSheet.create({
   loaderViewContainer: { marginBottom: spacing.md },
   loaderContainer: { justifyContent: "center", borderRadius: radius.md },
   loaderPadded: { padding: spacing.md },
+  bottomSheetModal: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

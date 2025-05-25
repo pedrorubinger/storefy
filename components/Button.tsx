@@ -24,6 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   style,
   icon,
+  onPress,
   ...rest
 }) => {
   const theme = useTheme();
@@ -38,6 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
         },
         style,
       ]}
+      onPress={onPress}
       {...rest}
     >
       <Typography font={font} size={size} color={color}>
