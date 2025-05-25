@@ -95,4 +95,6 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.lg,
     gap: spacing.md,
   },
+  bottomSheetModalGestureHandler: { flex: 1 },
+  bottomSheetModalIndicator: { display: "none" },
 });

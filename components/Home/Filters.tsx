@@ -52,7 +52,7 @@ const FilterButtons = <T extends string>({
       return (
         <Button
           key={option}
-          size="sm"
+          size="md"
           color="white"
           font="default500"
           backgroundColor={backgroundColor}
@@ -108,6 +108,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
       snapPoints={snapPoints}
       enableDynamicSizing={false}
       backdropComponent={renderBackdrop}
+      handleIndicatorStyle={styles.bottomSheetModalIndicator}
     >
       <BottomSheetView style={[styles.bottomSheetModal, { flex: 1 }]}>
         <View style={styles.bottomSheetModalContent}>
@@ -148,7 +149,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
 
           <View style={styles.bottomSheetModalBtnContainer}>
             <Button
-              size="sm"
+              size="md"
               color="white"
               font="default500"
               backgroundColor="primary"
@@ -159,7 +160,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
             </Button>
 
             <Button
-              size="sm"
+              size="md"
               color="primary"
               font="default500"
               backgroundColor="white"

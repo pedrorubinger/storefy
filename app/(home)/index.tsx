@@ -15,7 +15,7 @@ import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
 
 const { colors } = getTheme();
-
+const name = "Pedro Henrique";
 const products = [
   {
     id: "1",
@@ -68,10 +68,10 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.bottomSheetModalGestureHandler}>
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
-          <HomeHeader name="Pedro Henrique" />
+          <HomeHeader name={name} />
 
           <View style={styles.searchContainer}>
             <View style={styles.searchInputContainer}>
