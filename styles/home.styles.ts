@@ -67,6 +67,7 @@ export const styles = StyleSheet.create({
     gap: spacing.md,
     paddingBottom: spacing.lg,
   },
+  productListColumnWrapper: { justifyContent: "space-between" },
   loaderViewContainer: { marginBottom: spacing.md },
   loaderContainer: { justifyContent: "center", borderRadius: radius.md },
   loaderPadded: { padding: spacing.md },

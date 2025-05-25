@@ -143,7 +143,7 @@ export default function HomeScreen() {
                 />
               )}
               numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
+              columnWrapperStyle={styles.productListColumnWrapper}
               showsVerticalScrollIndicator={false}
             />
           )}
