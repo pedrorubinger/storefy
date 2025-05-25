@@ -1,4 +1,3 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
 
@@ -10,6 +9,7 @@ import { Input } from "@/components/Input";
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { colors } = getTheme();
 
@@ -77,22 +77,22 @@ export default function HomeScreen() {
           </Typography>
 
           <Button
-            size="xs"
+            size="sm"
             backgroundColor="primary"
             color="white"
             borderColor="grey100"
-            font="default600"
+            font="default500"
             icon={
               <Ionicons
-                name="chevron-down"
-                size={12}
+                name="filter"
+                size={14}
                 style={styles.sortByIcon}
                 color={colors.white}
               />
             }
             style={styles.sortByBtn}
           >
-            Sort by
+            Filters
           </Button>
         </View>
 
