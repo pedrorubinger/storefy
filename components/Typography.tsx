@@ -17,18 +17,22 @@ export const Typography: React.FC<Props> = ({
   font = "default400",
   size = "md",
   color = "grey500",
+  style,
   ...rest
 }) => {
   const theme = useTheme();
 
   return (
     <Text
-      style={{
-        fontFamily: theme.fonts[font],
-        fontSize: theme.fontSizes[size],
-        color: theme.colors[color],
-      }}
       {...rest}
+      style={[
+        {
+          fontFamily: theme.fonts[font],
+          fontSize: theme.fontSizes[size],
+          color: theme.colors[color],
+        },
+        style,
+      ]}
     >
       {children}
     </Text>
