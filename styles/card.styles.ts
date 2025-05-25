@@ -4,8 +4,12 @@ import { getTheme } from "@/constants/Theme";
 
 const theme = getTheme();
 
+// styles/card.styles.ts
 export const styles = StyleSheet.create({
   card: {
+    flex: 1,
+    minWidth: 150,
+    maxWidth: "48%",
     backgroundColor: theme.colors.white,
     borderRadius: theme.radius.lg,
     borderWidth: 1,
@@ -22,8 +26,8 @@ export const styles = StyleSheet.create({
     paddingVertical: theme.spacing.md,
   },
   thumbnail: {
-    width: 120,
-    height: 120,
+    width: 90,
+    height: 90,
     borderRadius: theme.radius.sm,
   },
   textContainer: {

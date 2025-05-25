@@ -64,8 +64,8 @@ export const styles = StyleSheet.create({
     marginLeft: spacing.xs,
   },
   productsList: {
-    paddingBottom: spacing.xl,
     gap: spacing.md,
+    paddingBottom: spacing.lg,
   },
   loaderViewContainer: { marginBottom: spacing.md },
   loaderContainer: { justifyContent: "center", borderRadius: radius.md },
@@ -86,9 +86,9 @@ export const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   bottomSheetModalScroll: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 24,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.lg,
   },
   bottomSheetModalBtnContainer: {
     padding: spacing.md,

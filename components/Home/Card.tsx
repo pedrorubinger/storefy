@@ -25,10 +25,10 @@ export const HomeProductCard: React.FC<CardProps> = ({
         resizeMode="cover"
       />
       <View style={styles.textContainer}>
-        <Typography font="default600" size="lg" color="grey700">
+        <Typography font="default600" size="sm" color="grey700">
           {title}
         </Typography>
-        <Typography font="default500" size="md" color="grey500">
+        <Typography font="default500" size="sm" color="grey500">
           {price}
         </Typography>
       </View>

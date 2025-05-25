@@ -19,7 +19,7 @@ const name = "Pedro Henrique";
 const products = [
   {
     id: "1",
-    title: "Awesome Product 1",
+    title: "iPhone 16 Pro",
     price: "$29.99",
     thumbnail:
       "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
@@ -47,6 +47,27 @@ const products = [
   },
   {
     id: "5",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "6",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "7",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "8",
     title: "Awesome Product 2",
     price: "$19.99",
     thumbnail:
@@ -121,6 +142,8 @@ export default function HomeScreen() {
                   thumbnail={item.thumbnail}
                 />
               )}
+              numColumns={2}
+              columnWrapperStyle={{ justifyContent: "space-between" }}
               showsVerticalScrollIndicator={false}
             />
           )}
