@@ -98,7 +98,7 @@ export default function HomeScreen() {
                   color={colors.white}
                 />
               }
-              style={styles.sortByBtn}
+              style={styles.roundedBtn}
               onPress={onOpenFilters}
             >
               Filters

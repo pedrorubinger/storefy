@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  sortByBtn: {
+  roundedBtn: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     flexDirection: "row",
@@ -70,9 +70,29 @@ export const styles = StyleSheet.create({
   loaderViewContainer: { marginBottom: spacing.md },
   loaderContainer: { justifyContent: "center", borderRadius: radius.md },
   loaderPadded: { padding: spacing.md },
+
   bottomSheetModal: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: spacing.xs,
+    paddingHorizontal: spacing.md,
+  },
+  bottomSheetModalSectionContent: {
+    gap: spacing.md,
+    marginBottom: spacing.xl,
+  },
+  bottomSheetModalContent: { flex: 1 },
+  bottomSheetModalFiltersContainer: {
+    gap: spacing.sm,
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  bottomSheetModalScroll: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 24,
+  },
+  bottomSheetModalBtnContainer: {
+    padding: spacing.md,
+    marginBottom: spacing.lg,
+    gap: spacing.md,
   },
 });
