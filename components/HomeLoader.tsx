@@ -12,7 +12,7 @@ const Spacer: React.FC<{ height?: number }> = ({ height = 16 }) => (
 );
 
 const Row: React.FC = () => (
-  <View style={{ marginBottom: 20 }}>
+  <View style={styles.loaderViewContainer}>
     <MotiView
       transition={{ type: "timing" }}
       style={[styles.loaderContainer, styles.loaderPadded]}

@@ -53,8 +53,9 @@ export const styles = StyleSheet.create({
   },
   productsList: {
     paddingBottom: spacing.xl,
-    gap: spacing.lg,
+    gap: spacing.md,
   },
+  loaderViewContainer: { marginBottom: spacing.md },
   loaderContainer: { justifyContent: "center", borderRadius: radius.md },
   loaderPadded: { padding: spacing.md },
 });
