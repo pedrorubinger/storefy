@@ -82,7 +82,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.productsHeader}>
-          <Typography font="default800" color="grey700">
+          <Typography font="default800" size="lg" color="grey700">
             Products
           </Typography>
 
