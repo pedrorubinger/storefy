@@ -5,7 +5,7 @@ import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
+import { HomeProductCard } from "@/components/home/Card";
 import { HomeFilters } from "@/components/home/Filters";
 import { HomeHeader } from "@/components/home/Header";
 import { HomeLoader } from "@/components/home/Loader";
@@ -115,7 +115,7 @@ export default function HomeScreen() {
               keyExtractor={(item) => String(item.id)}
               contentContainerStyle={styles.productsList}
               renderItem={({ item }) => (
-                <Card
+                <HomeProductCard
                   title={item.title}
                   price={item.price}
                   thumbnail={item.thumbnail}

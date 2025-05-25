@@ -11,7 +11,7 @@ interface CardProps {
   onPress?: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({
+export const HomeProductCard: React.FC<CardProps> = ({
   title,
   price,
   thumbnail,
