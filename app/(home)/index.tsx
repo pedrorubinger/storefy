@@ -1,12 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
@@ -75,21 +69,17 @@ export default function HomeScreen() {
           <View style={styles.searchInputContainer}>
             <Input placeholder="Search" />
           </View>
-
-          <TouchableOpacity style={styles.categoryFilterBtn}>
-            <Ionicons name="filter" size={24} color={colors.white} />
-          </TouchableOpacity>
         </View>
 
         <View style={styles.productsHeader}>
-          <Typography font="default800" size="lg" color="grey700">
+          <Typography font="default600" size="lg" color="grey700">
             Products
           </Typography>
 
           <Button
             size="sm"
-            backgroundColor="white"
-            color="grey700"
+            backgroundColor="primary"
+            color="white"
             borderColor="grey100"
             font="default600"
             icon={
@@ -97,7 +87,7 @@ export default function HomeScreen() {
                 name="chevron-down"
                 size={12}
                 style={styles.sortByIcon}
-                color={colors.grey700}
+                color={colors.white}
               />
             }
             style={styles.sortByBtn}

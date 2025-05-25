@@ -1,11 +1,8 @@
 import React from "react";
-import { View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 
 import { Typography } from "@/components/Typography";
-import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
-
-const { colors } = getTheme();
 
 interface Props {
   name: string;
@@ -21,13 +18,20 @@ export const HomeHeader: React.FC<Props> = ({ name }) => {
   return (
     <View style={styles.homeHeaderContainer}>
       <View>
-        <Typography color="grey500" size="lg">
+        <Typography color="grey500" size="md">
           Hello,
         </Typography>
-        <Typography color="primary" font="default700" size="xl">
+        <Typography color="primary" font="default700" size="lg">
           {label}
         </Typography>
       </View>
+
+      <TouchableOpacity>
+        <Image
+          style={styles.profileFilterBtn}
+          source={require("@/assets/images/avatar.jpg")}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

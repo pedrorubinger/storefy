@@ -18,16 +18,17 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginTop: spacing.md,
   },
-  categoryFilterBtn: {
-    borderRadius: radius.md,
-    backgroundColor: colors.green350,
-    padding: spacing.sm,
+  profileFilterBtn: {
+    width: 45,
+    height: 45,
+    borderRadius: radius.round,
   },
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: spacing.xl,
+    marginTop: spacing.lg,
     gap: spacing.md,
   },
   searchInputContainer: {
