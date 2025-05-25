@@ -1,3 +1,4 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { FlatList, SafeAreaView, View } from "react-native";
 
 import { Button } from "@/components/Button";
@@ -7,7 +8,6 @@ import { Input } from "@/components/Input";
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { colors } = getTheme();
 
@@ -40,6 +40,13 @@ const products = [
     thumbnail:
       "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
   },
+  {
+    id: "5",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
 ];
 
 export default function HomeScreen() {
@@ -60,15 +67,15 @@ export default function HomeScreen() {
           <Button
             size="xs"
             backgroundColor="white"
-            color="grey300"
-            borderColor="grey200"
-            font="default500"
+            color="grey500"
+            borderColor="grey100"
+            font="default600"
             icon={
               <Ionicons
                 name="chevron-down"
                 size={12}
                 style={styles.sortByIcon}
-                color={colors.grey300}
+                color={colors.grey500}
               />
             }
             style={styles.sortByBtn}
