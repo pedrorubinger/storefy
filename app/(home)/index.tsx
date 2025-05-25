@@ -6,9 +6,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { HomeFilters } from "@/components/HomeFilters";
-import { HomeHeader } from "@/components/HomeHeader";
-import { HomeLoader } from "@/components/HomeLoader";
+import { HomeFilters } from "@/components/home/Filters";
+import { HomeHeader } from "@/components/home/Header";
+import { HomeLoader } from "@/components/home/Loader";
 import { Input } from "@/components/Input";
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";

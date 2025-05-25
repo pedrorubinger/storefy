@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
-  const snapPoints = useMemo(() => ["25%", "50%", "75%"], []);
+  const snapPoints = useMemo(() => ["75%"], []);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetDefaultBackdropProps) => (
