@@ -1,9 +1,17 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { HomeHeader } from "@/components/HomeHeader";
+import { HomeLoader } from "@/components/HomeLoader";
 import { Input } from "@/components/Input";
 import { Typography } from "@/components/Typography";
 import { getTheme } from "@/constants/Theme";
@@ -50,6 +58,14 @@ const products = [
 ];
 
 export default function HomeScreen() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -90,19 +106,25 @@ export default function HomeScreen() {
           </Button>
         </View>
 
-        <FlatList
-          data={products}
-          keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={styles.productsList}
-          renderItem={({ item }) => (
-            <Card
-              title={item.title}
-              price={item.price}
-              thumbnail={item.thumbnail}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-        />
+        {isLoading ? (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <HomeLoader />
+          </ScrollView>
+        ) : (
+          <FlatList
+            data={products}
+            keyExtractor={(item) => String(item.id)}
+            contentContainerStyle={styles.productsList}
+            renderItem={({ item }) => (
+              <Card
+                title={item.title}
+                price={item.price}
+                thumbnail={item.thumbnail}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

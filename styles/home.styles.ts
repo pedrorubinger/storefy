@@ -55,4 +55,6 @@ export const styles = StyleSheet.create({
     paddingBottom: spacing.xl,
     gap: spacing.lg,
   },
+  loaderContainer: { justifyContent: "center", borderRadius: radius.md },
+  loaderPadded: { padding: spacing.md },
 });
