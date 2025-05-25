@@ -4,7 +4,6 @@ import { getTheme } from "@/constants/Theme";
 
 const theme = getTheme();
 
-// styles/card.styles.ts
 export const styles = StyleSheet.create({
   card: {
     flex: 1,
