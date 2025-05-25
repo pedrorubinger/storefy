@@ -8,6 +8,8 @@ const Theme = {
       primary: "#249c70",
 
       background: "#F4F6F5",
+      loaderBackground: "#dbdedb",
+      loaderForeground: "#ecebeb",
 
       black: "#1A1A1A",
 
