@@ -26,4 +26,21 @@ export const styles = StyleSheet.create({
   searchContainer: {
     marginTop: spacing.xl,
   },
+  productsHeader: {
+    marginTop: spacing.lg,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  sortByBtn: {
+    paddingHorizontal: spacing.sm + 4,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.md,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  sortByIcon: {
+    marginLeft: spacing.xs,
+  },
 });
