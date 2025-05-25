@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 
 import { Typography } from "@/components/Typography";
 import { styles } from "@/styles/card.styles";
@@ -8,11 +8,17 @@ interface CardProps {
   title: string;
   price: string;
   thumbnail: string;
+  onPress?: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({ title, price, thumbnail }) => {
+export const Card: React.FC<CardProps> = ({
+  title,
+  price,
+  thumbnail,
+  onPress,
+}) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={onPress} style={styles.card}>
       <Image
         source={{ uri: thumbnail }}
         style={styles.thumbnail}
@@ -26,6 +32,6 @@ export const Card: React.FC<CardProps> = ({ title, price, thumbnail }) => {
           {price}
         </Typography>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
