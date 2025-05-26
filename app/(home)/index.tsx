@@ -1,8 +1,9 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useEffect, useRef, useState } from "react";
-import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Button } from "@/components/Button";
 import { HomeProductCard } from "@/components/home/Card";
@@ -68,6 +69,20 @@ const products = [
   },
   {
     id: "8",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "9",
+    title: "Awesome Product 2",
+    price: "$19.99",
+    thumbnail:
+      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+  },
+  {
+    id: "10",
     title: "Awesome Product 2",
     price: "$19.99",
     thumbnail:
