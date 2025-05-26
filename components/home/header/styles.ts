@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: spacing.md,
+    marginTop: spacing.sm,
   },
   profileContainer: {
     flexDirection: "row",

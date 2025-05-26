@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: spacing.xs,
     paddingHorizontal: spacing.lg,
   },
 });
