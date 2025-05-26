@@ -2,9 +2,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 
-import { Typography } from "@/components/Typography";
+import { styles } from "@/components/home/header/styles";
+import { Typography } from "@/components/typography";
 import { getTheme } from "@/constants/Theme";
-import { styles } from "@/styles/home.styles";
 
 interface Props {
   name: string;

@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { Typography } from "@/components/Typography";
+import { styles } from "@/components/button/styles";
+import { Typography } from "@/components/typography";
 import { useTheme } from "@/hooks/useTheme";
 import { ColorName, FontName, FontSize } from "@/interfaces/Theme";
-import { styles } from "@/styles/button.styles";
 
 export interface ButtonProps extends TouchableOpacityProps {
   font?: FontName;
@@ -13,6 +13,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   backgroundColor?: ColorName;
   borderColor?: ColorName;
   icon?: React.ReactNode;
+  format?: "rounded";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -24,6 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   style,
   icon,
+  format,
   onPress,
   ...rest
 }) => {
@@ -37,6 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
           backgroundColor: theme.colors[backgroundColor],
           borderColor: theme.colors[borderColor],
         },
+        format === "rounded" && styles.roundedBtn,
         style,
       ]}
       onPress={onPress}

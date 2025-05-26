@@ -2,8 +2,8 @@ import { MotiView } from "moti";
 import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
 
+import { styles } from "@/components/home/loader/styles";
 import { getTheme } from "@/constants/Theme";
-import { styles } from "@/styles/home.styles";
 
 const { spacing, colors } = getTheme();
 

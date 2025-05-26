@@ -3,20 +3,19 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { useEffect, useRef, useState } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Button } from "@/components/Button";
-import { HomeProductCard } from "@/components/home/Card";
-import { HomeFilters } from "@/components/home/Filters";
-import { HomeHeader } from "@/components/home/Header";
-import { HomeLoader } from "@/components/home/Loader";
-import { Input } from "@/components/Input";
-import { Typography } from "@/components/Typography";
+import { Button } from "@/components/button";
+import { Container, ScreenContent } from "@/components/container";
+import { HomeProductCard } from "@/components/home/card";
+import { HomeFilters } from "@/components/home/filters";
+import { HomeHeader } from "@/components/home/header";
+import { HomeLoader } from "@/components/home/loader";
+import { Input } from "@/components/input";
+import { Typography } from "@/components/typography";
 import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
 
 const { colors } = getTheme();
-const name = "Pedro Henrique";
 const products = [
   {
     id: "1",
@@ -105,9 +104,9 @@ export default function HomeScreen() {
 
   return (
     <GestureHandlerRootView style={styles.bottomSheetModalGestureHandler}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.content}>
-          <HomeHeader name={name} />
+      <Container>
+        <ScreenContent>
+          <HomeHeader name="Pedro Henrique" />
 
           <View style={styles.searchContainer}>
             <View style={styles.searchInputContainer}>
@@ -134,7 +133,7 @@ export default function HomeScreen() {
                   color={colors.white}
                 />
               }
-              style={styles.roundedBtn}
+              format="rounded"
               onPress={onOpenFilters}
             >
               Filters
@@ -162,10 +161,10 @@ export default function HomeScreen() {
               showsVerticalScrollIndicator={false}
             />
           )}
-        </View>
+        </ScreenContent>
 
         <HomeFilters bottomSheetRef={bottomSheetRef} />
-      </SafeAreaView>
+      </Container>
     </GestureHandlerRootView>
   );
 }

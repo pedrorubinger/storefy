@@ -7,10 +7,10 @@ import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useCallback, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 
-import { Button } from "@/components/Button";
-import { Typography } from "@/components/Typography";
+import { Button } from "@/components/button";
+import { styles } from "@/components/home/filters/styles";
+import { Typography } from "@/components/typography";
 import { ColorName } from "@/interfaces/Theme";
-import { styles } from "@/styles/home.styles";
 
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
@@ -55,9 +55,9 @@ const FilterButtons = <T extends string>({
           size="md"
           color="white"
           font="default500"
+          format="rounded"
           backgroundColor={backgroundColor}
           borderColor={borderColor}
-          style={styles.roundedBtn}
           onPress={() => onSelect(option)}
         >
           {option}
