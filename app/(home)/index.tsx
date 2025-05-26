@@ -5,10 +5,9 @@ import { FlatList, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Button } from "@/components/button";
-import { Container, ScreenContent } from "@/components/container";
+import { Container, ContainerContent } from "@/components/container";
 import { HomeProductCard } from "@/components/home/card";
 import { HomeFilters } from "@/components/home/filters";
-import { HomeHeader } from "@/components/home/header";
 import { HomeLoader } from "@/components/home/loader";
 import { Input } from "@/components/input";
 import { Typography } from "@/components/typography";
@@ -105,9 +104,7 @@ export default function HomeScreen() {
   return (
     <GestureHandlerRootView style={styles.bottomSheetModalGestureHandler}>
       <Container>
-        <ScreenContent>
-          <HomeHeader name="Pedro Henrique" />
-
+        <ContainerContent>
           <View style={styles.searchContainer}>
             <View style={styles.searchInputContainer}>
               <Input placeholder="Search product" size="sm" />
@@ -161,7 +158,7 @@ export default function HomeScreen() {
               showsVerticalScrollIndicator={false}
             />
           )}
-        </ScreenContent>
+        </ContainerContent>
 
         <HomeFilters bottomSheetRef={bottomSheetRef} />
       </Container>

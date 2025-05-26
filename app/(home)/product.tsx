@@ -1,14 +1,13 @@
-import { Container, ScreenContent } from "@/components/container";
-import { Typography } from "@/components/typography";
+import { View } from "react-native";
 
-const name = "Pedro Henrique";
+import { Container, ContainerContent } from "@/components/container";
 
 export default function ProductScreen() {
   return (
     <Container>
-      <ScreenContent>
-        <Typography>{name}</Typography>
-      </ScreenContent>
+      <ContainerContent>
+        <View />
+      </ContainerContent>
     </Container>
   );
 }
