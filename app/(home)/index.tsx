@@ -111,7 +111,7 @@ export default function HomeScreen() {
 
           <View style={styles.searchContainer}>
             <View style={styles.searchInputContainer}>
-              <Input placeholder="Search" size="sm" />
+              <Input placeholder="Search product" size="sm" />
             </View>
           </View>
 
