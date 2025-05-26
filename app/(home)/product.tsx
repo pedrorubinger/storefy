@@ -5,7 +5,7 @@ import { Container, ContainerContent } from "@/components/ui/container";
 export default function ProductScreen() {
   return (
     <Container>
-      <ContainerContent>
+      <ContainerContent useHeader={false}>
         <View />
       </ContainerContent>
     </Container>
