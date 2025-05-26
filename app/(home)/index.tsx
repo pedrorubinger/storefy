@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import { Button } from "@/components/button";
-import { Container, ContainerContent } from "@/components/container";
 import { HomeProductCard } from "@/components/home/card";
 import { HomeFilters } from "@/components/home/filters";
 import { HomeLoader } from "@/components/home/loader";
-import { Input } from "@/components/input";
-import { Typography } from "@/components/typography";
+import { Button } from "@/components/ui/button";
+import { Container, ContainerContent } from "@/components/ui/container";
+import { Input } from "@/components/ui/input";
+import { Typography } from "@/components/ui/typography";
 import { getTheme } from "@/constants/Theme";
 import { styles } from "@/styles/home.styles";
 

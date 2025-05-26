@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { styles } from "@/components/container/styles";
 import { HomeHeader } from "@/components/home/header";
+import { styles } from "@/components/ui/container/styles";
 
 interface ContainerProps {
   children: React.ReactNode;

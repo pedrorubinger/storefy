@@ -7,9 +7,9 @@ import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useCallback, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 
-import { Button } from "@/components/button";
 import { styles } from "@/components/home/filters/styles";
-import { Typography } from "@/components/typography";
+import { Button } from "@/components/ui/button";
+import { Typography } from "@/components/ui/typography";
 import { ColorName } from "@/interfaces/Theme";
 
 interface Props {

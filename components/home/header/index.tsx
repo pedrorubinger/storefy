@@ -3,7 +3,7 @@ import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 
 import { styles } from "@/components/home/header/styles";
-import { Typography } from "@/components/typography";
+import { Typography } from "@/components/ui/typography";
 import { getTheme } from "@/constants/Theme";
 
 interface Props {

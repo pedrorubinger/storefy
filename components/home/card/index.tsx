@@ -3,7 +3,7 @@ import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 
 import { styles } from "@/components/home/card/styles";
-import { Typography } from "@/components/typography";
+import { Typography } from "@/components/ui/typography";
 
 interface CardProps {
   title: string;
