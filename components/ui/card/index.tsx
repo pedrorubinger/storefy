@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { styles } from "@/components/home/card/styles";
+import { styles } from "@/components/ui/card/styles";
 
 interface CardProps extends TouchableOpacityProps {
   children: React.ReactNode;
