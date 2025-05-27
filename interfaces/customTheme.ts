@@ -1,4 +1,4 @@
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 
 export type ISupportedTheme = "light";
 export type ColorName = keyof ReturnType<typeof getTheme>["colors"];

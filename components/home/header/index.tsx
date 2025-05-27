@@ -4,7 +4,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 
 import { styles } from "@/components/home/header/styles";
 import { Typography } from "@/components/ui/typography";
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 
 interface Props {
   name: string;

@@ -3,7 +3,7 @@ import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
 
 import { styles } from "@/components/home/loader/styles";
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 
 const { spacing, colors } = getTheme();
 

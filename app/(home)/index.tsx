@@ -13,7 +13,7 @@ import { Container, ContainerContent } from "@/components/ui/container";
 import { Error } from "@/components/ui/error";
 import { Input } from "@/components/ui/input";
 import { Typography } from "@/components/ui/typography";
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useProduct } from "@/hooks/useProduct";
 import { mapCategory } from "@/services/api/products/mappers";

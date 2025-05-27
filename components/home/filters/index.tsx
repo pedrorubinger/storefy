@@ -17,7 +17,7 @@ import {
 } from "@/constants/product";
 import { FilterProductsParams } from "@/hooks/useFetchProduct";
 import { useProduct } from "@/hooks/useProduct";
-import { ColorName } from "@/interfaces/theme";
+import { ColorName } from "@/interfaces/customTheme";
 import { ProductCategory } from "@/models/Product";
 
 interface HomeFiltersProps {

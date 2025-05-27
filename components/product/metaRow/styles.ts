@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 
 const { spacing } = getTheme();
 

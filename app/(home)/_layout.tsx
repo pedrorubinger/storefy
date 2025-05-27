@@ -1,7 +1,6 @@
 import { Stack } from "expo-router";
-import React from "react";
 
-import { getTheme } from "@/constants/Theme";
+import { getTheme } from "@/constants/theme";
 import { ProductProvider } from "@/contexts/product";
 
 const { colors } = getTheme();
