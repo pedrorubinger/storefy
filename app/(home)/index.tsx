@@ -1,3 +1,4 @@
+import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useCallback, useEffect, useRef } from "react";
@@ -15,6 +16,7 @@ import { Typography } from "@/components/ui/typography";
 import { getTheme } from "@/constants/Theme";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useProduct } from "@/hooks/useProduct";
+import { mapCategory } from "@/services/api/products/mappers";
 import { styles } from "@/styles/home.styles";
 
 const { colors } = getTheme();
@@ -52,7 +54,9 @@ export default function HomeScreen() {
 
         <View style={styles.productsHeader}>
           <Typography font="default600" size="lg" color="grey700">
-            Products
+            {selectedFilters?.category
+              ? mapCategory(selectedFilters?.category)?.name
+              : "Products"}
           </Typography>
 
           <Button
@@ -74,6 +78,22 @@ export default function HomeScreen() {
           >
             Filters
           </Button>
+        </View>
+
+        <View style={styles.filterDescriptionContainer}>
+          {(selectedFilters?.sortBy || selectedFilters?.order) && (
+            <Typography font="default200" size="xs" color="grey700">
+              {!!selectedFilters?.sortBy &&
+                `Sorting by ${selectedFilters?.sortBy}`}
+              &nbsp;
+              {!!selectedFilters?.order &&
+                (selectedFilters?.order === "asc" ? (
+                  <Feather name="arrow-down" />
+                ) : (
+                  <Feather name="arrow-up" />
+                ))}
+            </Typography>
+          )}
         </View>
 
         {isLoading && !products?.length ? (

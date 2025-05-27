@@ -17,10 +17,13 @@ export const styles = StyleSheet.create({
   },
   productsHeader: {
     marginTop: spacing.lg,
-    marginBottom: spacing.md,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  filterDescriptionContainer: {
+    marginTop: spacing.xs,
+    marginBottom: spacing.md,
   },
   sortByIcon: {
     marginLeft: spacing.xs,
