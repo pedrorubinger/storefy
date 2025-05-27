@@ -34,3 +34,17 @@ In the output, you'll find options to open the app in a
 - Implementation of product search by name;
 
 - Implementation of Tests and Storybook;
+
+## Screens
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 51 53](https://github.com/user-attachments/assets/e9296966-58fb-49c3-b1e0-655c515c5bff)
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 54 19](https://github.com/user-attachments/assets/c0e9308a-f1aa-4018-b99c-480fed2526fb)
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 54 12](https://github.com/user-attachments/assets/195130c4-5ec2-41d4-9446-c465a61c65aa)
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 55 01](https://github.com/user-attachments/assets/93e3a15b-c9b9-49de-b0a1-5f9d71252fca)
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 54 35](https://github.com/user-attachments/assets/3ee624b6-e3af-4b23-8341-195eb6011d6b)
+
+![Simulator Screenshot - iPhone 16 - 2025-05-27 at 12 41 37](https://github.com/user-attachments/assets/95b265e9-3aa1-4991-a574-991d84bb0793)
