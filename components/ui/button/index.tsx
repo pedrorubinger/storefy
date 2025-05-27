@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
       backgroundColor: disabled
         ? theme.colors.grey300
         : theme.colors[backgroundColor],
-      borderColor: disabled ? theme.colors.grey500 : theme.colors[borderColor],
+      borderColor: disabled ? theme.colors.grey200 : theme.colors[borderColor],
       opacity: disabled ? 0.6 : 1,
     },
     format === "rounded" && styles.roundedBtn,
