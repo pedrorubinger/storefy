@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, ViewProps } from "react-native";
 import {
   NativeSafeAreaViewProps,
   SafeAreaView,
@@ -23,7 +23,7 @@ export const Container: React.FC<ContainerProps> = ({
   );
 };
 
-interface ContainerContentProps {
+interface ContainerContentProps extends ViewProps {
   children: React.ReactNode;
   /** @default true */
   useHeader?: boolean;
@@ -32,9 +32,11 @@ interface ContainerContentProps {
 export const ContainerContent: React.FC<ContainerContentProps> = ({
   children,
   useHeader = true,
+  style,
+  ...rest
 }) => {
   return (
-    <View style={styles.content}>
+    <View style={[styles.content, style]} {...rest}>
       {useHeader && <HomeHeader name="Pedro Rubinger" />}
       {children}
     </View>
