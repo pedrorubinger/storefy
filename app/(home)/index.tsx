@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -12,94 +12,24 @@ import { Container, ContainerContent } from "@/components/ui/container";
 import { Input } from "@/components/ui/input";
 import { Typography } from "@/components/ui/typography";
 import { getTheme } from "@/constants/Theme";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { useProduct } from "@/hooks/useProduct";
 import { styles } from "@/styles/home.styles";
 
 const { colors } = getTheme();
-const products = [
-  {
-    id: "1",
-    title: "iPhone 16 Pro",
-    price: "$29.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
-  },
-  {
-    id: "2",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "3",
-    title: "Awesome Product 1",
-    price: "$29.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
-  },
-  {
-    id: "4",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "5",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "6",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "7",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "8",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "9",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-  {
-    id: "10",
-    title: "Awesome Product 2",
-    price: "$19.99",
-    thumbnail:
-      "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-  },
-];
 
 export default function HomeScreen() {
-  const [isLoading, setIsLoading] = useState(true);
+  const isMounted = useIsMounted();
+  const { products, isFetchingProducts, fetchProducts } = useProduct();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const isLoading = isFetchingProducts || !isMounted();
 
   const onOpenFilters = () => bottomSheetRef.current?.expand();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }, []);
+    fetchProducts();
+  }, [fetchProducts]);
 
   return (
     <GestureHandlerRootView style={styles.bottomSheetModalGestureHandler}>
@@ -147,13 +77,7 @@ export default function HomeScreen() {
               data={products}
               keyExtractor={(item) => String(item.id)}
               contentContainerStyle={styles.productsList}
-              renderItem={({ item }) => (
-                <HomeProductCard
-                  title={item.title}
-                  price={item.price}
-                  thumbnail={item.thumbnail}
-                />
-              )}
+              renderItem={({ item }) => <HomeProductCard product={item} />}
               numColumns={2}
               columnWrapperStyle={styles.productListColumnWrapper}
               showsVerticalScrollIndicator={false}

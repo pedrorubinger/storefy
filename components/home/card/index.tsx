@@ -1,40 +1,41 @@
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Image, View } from "react-native";
 
 import { styles } from "@/components/home/card/styles";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
+import { useProduct } from "@/hooks/useProduct";
+import { Product } from "@/models/Product";
 
 interface CardProps {
-  title: string;
-  price: string;
-  thumbnail: string;
-  onPress?: () => void;
+  product: Product;
 }
 
-export const HomeProductCard: React.FC<CardProps> = ({
-  title,
-  price,
-  thumbnail,
-}) => {
+export const HomeProductCard: React.FC<CardProps> = ({ product }) => {
+  const { selectProduct } = useProduct();
+  const router = useRouter();
+
+  const onOpenProductDetails = () => {
+    selectProduct(product);
+    router.navigate({ pathname: "/(home)/product" });
+  };
+
   return (
-    <Link href="/(home)/product" asChild>
-      <Card style={styles.card}>
-        <Image
-          source={{ uri: thumbnail }}
-          style={styles.thumbnail}
-          resizeMode="cover"
-        />
-        <View style={styles.textContainer}>
-          <Typography font="default600" size="sm" color="grey700">
-            {title}
-          </Typography>
-          <Typography font="default500" size="sm" color="grey500">
-            {price}
-          </Typography>
-        </View>
-      </Card>
-    </Link>
+    <Card type="pressable" style={styles.card} onPress={onOpenProductDetails}>
+      <Image
+        source={{ uri: product.thumbnail }}
+        style={styles.thumbnail}
+        resizeMode="cover"
+      />
+      <View style={styles.textContainer}>
+        <Typography font="default600" size="sm" color="grey700">
+          {product.title}
+        </Typography>
+        <Typography font="default500" size="sm" color="grey500">
+          {product.price}
+        </Typography>
+      </View>
+    </Card>
   );
 };
