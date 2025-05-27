@@ -16,4 +16,7 @@ export const styles = StyleSheet.create({
   textContainer: {
     marginTop: theme.spacing.sm,
   },
+  price: {
+    marginTop: theme.spacing.xs,
+  },
 });
