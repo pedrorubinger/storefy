@@ -1,12 +1,14 @@
 ## Get started
 
-1. Install dependencies
+1. Clone the repository and install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Create a `.env` file and paste the required variables inside it. Use the `.env.example` file as a reference. You can use the same values as those in the example environment variables.
+
+3. Start the app
 
    ```bash
    npx expo start
