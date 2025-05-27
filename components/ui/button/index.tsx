@@ -4,7 +4,7 @@ import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { styles } from "@/components/ui/button/styles";
 import { Typography } from "@/components/ui/typography";
 import { useTheme } from "@/hooks/useTheme";
-import { ColorName, FontName, FontSize } from "@/interfaces/Theme";
+import { ColorName, FontName, FontSize } from "@/interfaces/theme";
 
 export interface ButtonProps extends TouchableOpacityProps {
   font?: FontName;

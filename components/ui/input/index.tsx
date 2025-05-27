@@ -3,7 +3,7 @@ import { TextInput, TextInputProps } from "react-native";
 
 import { styles } from "@/components/ui/input/styles";
 import { useTheme } from "@/hooks/useTheme";
-import { ColorName, FontName, FontSize } from "@/interfaces/Theme";
+import { ColorName, FontName, FontSize } from "@/interfaces/theme";
 
 export interface InputProps extends TextInputProps {
   font?: FontName;
