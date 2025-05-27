@@ -70,7 +70,6 @@ export default function HomeScreen() {
               />
             }
             format="rounded"
-            disabled={isLoading}
             onPress={onOpenFilters}
           >
             Filters
