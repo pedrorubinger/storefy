@@ -118,7 +118,7 @@ export default function ProductScreen() {
               <MetaRow label="Brand" value={product.brand} />
               <MetaRow label="Warranty" value={product.warrantyInformation} />
               <MetaRow label="Shipping" value={product.shippingInformation} />
-              <MetaRow label="Stock" value={`${product.stock} units`} />
+              <MetaRow label="Stock" value={`${product.stock} unit(s)`} />
             </View>
 
             <Typography
