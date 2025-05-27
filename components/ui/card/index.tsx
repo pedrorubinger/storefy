@@ -1,17 +1,35 @@
 import React from "react";
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps, View } from "react-native";
 
 import { styles } from "@/components/ui/card/styles";
 
 interface CardProps extends TouchableOpacityProps {
   children: React.ReactNode;
-  onPress?: () => void;
+  pressable?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({ children, style, onPress }) => {
+export const Card: React.FC<CardProps> = ({
+  children,
+  style,
+  onPress,
+  pressable = true,
+  ...rest
+}) => {
+  if (pressable && onPress) {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={[styles.card, style]}
+        {...rest}
+      >
+        {children}
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.card, style]}>
+    <View style={[styles.card, style]} {...rest}>
       {children}
-    </TouchableOpacity>
+    </View>
   );
 };
