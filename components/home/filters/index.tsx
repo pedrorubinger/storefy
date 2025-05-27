@@ -6,12 +6,12 @@ import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typesc
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useCallback, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
 import { ColorName } from "@/interfaces/Theme";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
