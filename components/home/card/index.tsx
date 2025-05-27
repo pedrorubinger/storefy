@@ -5,6 +5,7 @@ import { Image, View } from "react-native";
 import { styles } from "@/components/home/card/styles";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
+import { formatCurrency } from "@/helpers/currency";
 import { useProduct } from "@/hooks/useProduct";
 import { Product } from "@/models/Product";
 
@@ -32,8 +33,13 @@ export const HomeProductCard: React.FC<CardProps> = ({ product }) => {
         <Typography font="default600" size="sm" color="grey700">
           {product.title}
         </Typography>
-        <Typography font="default500" size="sm" color="grey500">
-          {product.price}
+        <Typography
+          style={styles.price}
+          font="default500"
+          size="sm"
+          color="grey500"
+        >
+          {formatCurrency(product.price)}
         </Typography>
       </View>
     </Card>

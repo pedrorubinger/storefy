@@ -5,6 +5,7 @@ import { StarRating } from "@/components/product/rating";
 import { Card } from "@/components/ui/card";
 import { Container, ContainerContent } from "@/components/ui/container";
 import { Typography } from "@/components/ui/typography";
+import { formatCurrency } from "@/helpers/currency";
 import { useProduct } from "@/hooks/useProduct";
 import { styles } from "@/styles/product.styles";
 
@@ -47,7 +48,7 @@ export default function ProductScreen() {
               size="md"
               style={styles.price}
             >
-              ${selectedProduct.price.toFixed(2)}
+              {formatCurrency(selectedProduct.price)}
             </Typography>
 
             <Typography
