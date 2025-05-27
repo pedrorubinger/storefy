@@ -11,8 +11,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
-import { sortProductsByOptions } from "@/constants/product";
-import { FetchProductsParams } from "@/hooks/useFetchProduct";
+import {
+  orderProductsByOptions,
+  sortProductsByOptions,
+} from "@/constants/product";
+import { FilterProductsParams } from "@/hooks/useFetchProduct";
 import { useProduct } from "@/hooks/useProduct";
 import { ColorName } from "@/interfaces/theme";
 import { ProductCategory } from "@/models/Product";
@@ -56,11 +59,11 @@ const FilterButtons = <T extends ProductCategory>({
 
 export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
   const [unsavedFilters, setUnsavedFilters] = useState<
-    FetchProductsParams | undefined
+    FilterProductsParams | undefined
   >();
 
   const { categories, selectFilters } = useProduct();
-  const snapPoints = useMemo(() => ["75%"], []);
+  const snapPoints = useMemo(() => ["80%"], []);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetDefaultBackdropProps) => (
@@ -128,6 +131,22 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
                     ...prev,
                     sortBy:
                       sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
+                  }))
+                }
+              />
+            </View>
+
+            <View style={styles.bottomSheetModalSectionContent}>
+              <Typography font="default600" size="md" color="black">
+                Order products by
+              </Typography>
+              <FilterButtons
+                options={orderProductsByOptions}
+                selected={unsavedFilters?.order}
+                onSelect={(order) =>
+                  setUnsavedFilters((prev) => ({
+                    ...prev,
+                    order: order.slug === prev?.order ? undefined : order.slug,
                   }))
                 }
               />

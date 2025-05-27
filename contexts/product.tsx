@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 import { useFetchCategories } from "@/hooks/useFetchCategories";
-import { FetchProductsParams, useFetchProduct } from "@/hooks/useFetchProduct";
+import { FilterProductsParams, useFetchProduct } from "@/hooks/useFetchProduct";
 import { Product, ProductCategory } from "@/models/Product";
 import { FetchProductsMetadata } from "@/services/api/products/dtos";
 
@@ -14,11 +14,11 @@ interface ProductContextType {
   isFetchingCategories: boolean;
   isFetching: boolean;
   meta: FetchProductsMetadata;
-  selectedFilters: FetchProductsParams | undefined;
-  fetchProducts: (params?: FetchProductsParams) => Promise<void>;
+  selectedFilters: FilterProductsParams | undefined;
+  fetchProducts: (params?: FilterProductsParams) => Promise<void>;
   fetchCategories: () => Promise<void>;
   selectProduct: (product: Product) => void;
-  selectFilters: (filters?: FetchProductsParams) => void;
+  selectFilters: (filters?: FilterProductsParams) => void;
 }
 
 export const ProductContext = createContext<ProductContextType | null>(null);
@@ -30,7 +30,7 @@ interface Props {
 export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<
-    FetchProductsParams | undefined
+    FilterProductsParams | undefined
   >();
 
   const {
@@ -52,14 +52,15 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
   const selectProduct = (product: Product | null) =>
     setSelectedProduct(product);
 
-  const selectFilters = async (params?: FetchProductsParams) => {
+  const selectFilters = async (params?: FilterProductsParams) => {
     const category = params?.category;
     const sortBy = params?.sortBy;
+    const order = params?.order;
 
-    setSelectedFilters({ category, sortBy });
+    setSelectedFilters({ category, sortBy, order });
     resetProducts();
 
-    await fetchProducts({ category, sortBy });
+    await fetchProducts({ category, sortBy, order });
   };
 
   return (

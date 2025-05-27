@@ -25,7 +25,7 @@ export default function HomeScreen() {
     products,
     meta,
     error,
-    selectedCategory,
+    selectedFilters,
     isFetchingCategories,
     isFetchingProducts,
     fetchCategories,
@@ -92,7 +92,11 @@ export default function HomeScreen() {
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
               if (!isFetchingProducts && products.length < meta.total) {
-                fetchProducts({ category: selectedCategory });
+                fetchProducts({
+                  category: selectedFilters?.category,
+                  order: selectedFilters?.order,
+                  sortBy: selectedFilters?.sortBy,
+                });
               }
             }}
             onEndReachedThreshold={0.5}
@@ -104,7 +108,7 @@ export default function HomeScreen() {
   }, [
     fetchProducts,
     error,
-    selectedCategory,
+    selectedFilters,
     isFetchingProducts,
     isLoading,
     meta.total,

@@ -3,6 +3,7 @@ export interface FetchDummyProductParams {
   limit?: number;
   category?: string;
   sortBy?: string;
+  order?: string;
 }
 
 export interface FetchDummyProductResponse {

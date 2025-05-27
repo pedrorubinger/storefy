@@ -10,9 +10,10 @@ const DEFINITIONS = {
   initialMeta: { total: 0, lastId: 0 },
 };
 
-export interface FetchProductsParams {
+export interface FilterProductsParams {
   category?: string;
   sortBy?: string;
+  order?: string;
 }
 
 export const useFetchProduct = () => {
@@ -23,7 +24,7 @@ export const useFetchProduct = () => {
     DEFINITIONS.initialMeta
   );
 
-  const fetchProducts = useCallback(async (params?: FetchProductsParams) => {
+  const fetchProducts = useCallback(async (params?: FilterProductsParams) => {
     setIsFetchingProducts(true);
     setError(null);
 
@@ -33,6 +34,7 @@ export const useFetchProduct = () => {
         page: params?.category ? undefined : prevMeta.lastId,
         category: params?.category,
         sortBy: params?.sortBy,
+        order: params?.order,
       })
         .then((data) => {
           const lastId =
