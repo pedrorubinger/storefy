@@ -40,37 +40,34 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
     setIsLoading(true);
     setError(null);
 
-    try {
-      setMeta((prevMeta) => {
-        getProductsUseCase({
-          limit: DEFINITIONS.limit,
-          page: prevMeta.lastId,
+    setMeta((prevMeta) => {
+      getProductsUseCase({
+        limit: DEFINITIONS.limit,
+        page: prevMeta.lastId,
+      })
+        .then((data) => {
+          const lastId =
+            data.products.length === data.total
+              ? prevMeta.lastId
+              : Number(data.products[data.products.length - 1].id);
+
+          setMeta((prev) => ({
+            ...prev,
+            lastId,
+            total: data.total || prev.total,
+          }));
+
+          setProducts((prev) => [...prev, ...data.products]);
+          setError(null);
+          setIsLoading(false);
         })
-          .then((data) => {
-            const lastId =
-              data.products.length === data.total
-                ? prevMeta.lastId
-                : Number(data.products[data.products.length - 1].id);
+        .catch((err) => {
+          setError(err.message);
+          setIsLoading(false);
+        });
 
-            setMeta((prev) => ({
-              ...prev,
-              lastId,
-              total: data.total || prev.total,
-            }));
-            setProducts((prev) => [...prev, ...data.products]);
-            setIsLoading(false);
-          })
-          .catch(() => {
-            setError("Failed to fetch products");
-            setIsLoading(false);
-          });
-
-        return prevMeta;
-      });
-    } catch {
-      setError("Failed to fetch products");
-      setIsLoading(false);
-    }
+      return prevMeta;
+    });
   }, []);
 
   const selectProduct = (product: Product | null) =>

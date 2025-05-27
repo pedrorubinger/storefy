@@ -1,71 +1,32 @@
 import { AxiosError } from "axios";
 
-type ApiError = {
-  message: string;
-  statusCode?: number;
-  details?: any;
-  isNetworkError?: boolean;
+import { ApiError, ErrorCode, HandledError } from "@/interfaces/error";
+
+type ErrorParam = AxiosError | HandledError | any;
+
+const DEFAULT_MESSAGE =
+  "We're very sorry. Our team's already investigating what happened. Please try again in a moment or contact us.";
+
+const Messages: { [key in ErrorCode | string]: string } = {
+  ["DEFAULT" as keyof ErrorCode]: DEFAULT_MESSAGE,
+  [ErrorCode.INTERNAL]: DEFAULT_MESSAGE,
 };
 
-export function handleError(error: unknown): ApiError {
-  if (isAxiosError(error)) {
-    const axiosError = error as AxiosError;
+export const handleError = (error: ErrorParam): HandledError => {
+  const defaultMsg = Messages["DEFAULT"];
 
-    if (axiosError.response) {
-      const status = axiosError.response.status;
-      const data = axiosError.response.data;
+  try {
+    if (error?.handled) return handleError(error.plain);
 
-      let message = "An unexpected error occurred.";
-      let details = data;
+    if (error instanceof AxiosError) {
+      const api: ApiError | undefined | null = error?.response?.data;
+      const message = Messages[api?.code ?? "DEFAULT"];
 
-      switch (status) {
-        case 400:
-          message = "Bad request. Please check your input.";
-          break;
-        case 401:
-          message = "Unauthorized. Please log in again.";
-          break;
-        case 403:
-          message = "Forbidden. You don't have access to this resource.";
-          break;
-        case 404:
-          message = "Resource not found.";
-          break;
-        case 422:
-          message = "Validation failed. Please check your input.";
-          break;
-        case 429:
-          message = "Too many requests. Please slow down.";
-          break;
-        case 500:
-          message = "Server error. Please try again later.";
-          break;
-        default:
-          message =
-            (data as Record<string, string> | undefined)?.message ||
-            "An unexpected error occurred.";
-      }
-
-      return {
-        message,
-        statusCode: status,
-        details,
-      };
+      return { plain: error, api, handled: true, message };
     }
 
-    if (axiosError.request) {
-      return {
-        message: "Network error. Please check your internet connection.",
-        isNetworkError: true,
-      };
-    }
+    return { plain: error, api: null, handled: true, message: defaultMsg };
+  } catch (error) {
+    return { plain: error, api: null, handled: true, message: defaultMsg };
   }
-
-  return {
-    message: (error as Error)?.message || "An unknown error occurred.",
-  };
-}
-
-function isAxiosError(error: unknown): error is AxiosError {
-  return (error as AxiosError).isAxiosError !== undefined;
-}
+};
