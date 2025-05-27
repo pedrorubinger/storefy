@@ -66,10 +66,31 @@ const FilterButtons = <T extends ProductCategory>({
 );
 
 export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
-  const [unsavedFilters, setUnsavedFilters] = useState<FilterProductsParams>();
+  const { categories, selectedFilters, selectFilters } = useProduct();
 
-  const { categories, selectFilters } = useProduct();
+  const initialFilters = useMemo(
+    () => ({
+      category: selectedFilters?.category,
+      order: selectedFilters?.order,
+      sortBy: selectedFilters?.sortBy,
+    }),
+    [selectedFilters]
+  );
+
+  const [unsavedFilters, setUnsavedFilters] =
+    useState<FilterProductsParams>(initialFilters);
+
   const snapPoints = useMemo(() => ["80%"], []);
+
+  const onApply = () => {
+    selectFilters(unsavedFilters);
+    bottomSheetRef.current?.close();
+  };
+
+  const onCancel = useCallback(() => {
+    setUnsavedFilters(initialFilters);
+    bottomSheetRef.current?.close();
+  }, [bottomSheetRef, initialFilters]);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetDefaultBackdropProps) => (
@@ -77,35 +98,27 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
         {...props}
         disappearsOnIndex={-1}
         appearsOnIndex={0}
+        onPress={onCancel}
       />
     ),
-    []
+    [onCancel]
   );
 
-  const handleApply = () => {
-    selectFilters(unsavedFilters);
-    bottomSheetRef.current?.close();
-  };
-
-  const handleCancel = () => {
-    bottomSheetRef.current?.close();
-  };
-
-  const handleCategorySelect = (category: ProductCategory) => {
+  const onCategorySelect = (category: ProductCategory) => {
     setUnsavedFilters((prev) => ({
       ...prev,
       category: category.slug === prev?.category ? undefined : category.slug,
     }));
   };
 
-  const handleSortBySelect = (sortBy: { slug: string; name: string }) => {
+  const onSortBySelect = (sortBy: { slug: string; name: string }) => {
     setUnsavedFilters((prev) => ({
       ...prev,
       sortBy: sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
     }));
   };
 
-  const handleOrderBySelect = (order: { slug: string; name: string }) => {
+  const onOrderBySelect = (order: { slug: string; name: string }) => {
     setUnsavedFilters((prev) => ({
       ...prev,
       order: order.slug === prev?.order ? undefined : order.slug,
@@ -134,7 +147,7 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
               <FilterButtons<ProductCategory>
                 options={categories}
                 selected={unsavedFilters?.category}
-                onSelect={handleCategorySelect}
+                onSelect={onCategorySelect}
               />
             </View>
 
@@ -145,7 +158,7 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
               <FilterButtons
                 options={sortProductsByOptions}
                 selected={unsavedFilters?.sortBy}
-                onSelect={handleSortBySelect}
+                onSelect={onSortBySelect}
               />
             </View>
 
@@ -156,7 +169,7 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
               <FilterButtons
                 options={orderProductsByOptions}
                 selected={unsavedFilters?.order}
-                onSelect={handleOrderBySelect}
+                onSelect={onOrderBySelect}
               />
             </View>
           </ScrollView>
@@ -171,7 +184,7 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
               font="default500"
               backgroundColor="primary"
               borderColor="green400"
-              onPress={handleApply}
+              onPress={onApply}
               disabled={!unsavedFilters}
             >
               Apply filters
@@ -183,7 +196,7 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
               font="default500"
               backgroundColor="white"
               borderColor="green400"
-              onPress={handleCancel}
+              onPress={onCancel}
             >
               Cancel
             </Button>
