@@ -3,6 +3,7 @@ import React from "react";
 import { Image, View } from "react-native";
 
 import { styles } from "@/components/home/card/styles";
+import { StarRating } from "@/components/product/rating";
 import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { formatCurrency } from "@/helpers/currency";
@@ -33,6 +34,7 @@ export const HomeProductCard: React.FC<CardProps> = ({ product }) => {
         <Typography font="default600" size="sm" color="grey700">
           {product.title}
         </Typography>
+        <StarRating style={styles.rating} rating={product.rating} />
         <Typography
           style={styles.price}
           font="default500"

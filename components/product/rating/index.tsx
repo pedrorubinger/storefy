@@ -1,11 +1,13 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
+import { StyleProp, TextStyle } from "react-native";
 
 import { styles } from "@/components/product/rating/styles";
 import { Typography } from "@/components/ui/typography";
 
 interface Props {
   rating: number;
+  style?: StyleProp<TextStyle>;
 }
 
 const DEFINITION = {
@@ -13,7 +15,7 @@ const DEFINITION = {
   starSize: 14,
 };
 
-export const StarRating: React.FC<Props> = ({ rating }) => {
+export const StarRating: React.FC<Props> = ({ rating, style }) => {
   const fullStars = Math.floor(rating);
   const decimal = rating - fullStars;
   const hasHalfStar = decimal >= 0.5;
@@ -63,7 +65,7 @@ export const StarRating: React.FC<Props> = ({ rating }) => {
       font="default400"
       color="grey700"
       size="xs"
-      style={styles.rating}
+      style={[styles.rating, style]}
     >
       {rating.toFixed(1)} {stars}
     </Typography>

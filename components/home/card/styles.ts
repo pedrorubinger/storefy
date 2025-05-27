@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { getTheme } from "@/constants/Theme";
 
-const theme = getTheme();
+const { spacing, radius } = getTheme();
 
 export const styles = StyleSheet.create({
   card: {
@@ -11,12 +11,15 @@ export const styles = StyleSheet.create({
   thumbnail: {
     width: 90,
     height: 90,
-    borderRadius: theme.radius.sm,
+    borderRadius: radius.sm,
   },
   textContainer: {
-    marginTop: theme.spacing.sm,
+    marginTop: spacing.xs,
   },
   price: {
-    marginTop: theme.spacing.xs,
+    marginTop: spacing.xs,
+  },
+  rating: {
+    marginTop: spacing.xs,
   },
 });

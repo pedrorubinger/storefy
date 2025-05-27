@@ -59,14 +59,14 @@ export default function HomeScreen() {
             size="sm"
             backgroundColor="primary"
             color="white"
-            borderColor="grey100"
+            borderColor="primary"
             font="default500"
             icon={
               <Ionicons
                 name="filter"
                 size={14}
                 style={styles.sortByIcon}
-                color={isLoading ? colors.grey500 : colors.white}
+                color={colors.white}
               />
             }
             format="rounded"
