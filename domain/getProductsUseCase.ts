@@ -9,15 +9,17 @@ interface OutputGetProduct {
 }
 
 interface InputGetProduct {
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
+  category?: string;
 }
 
 export async function getProductsUseCase({
   limit,
   page,
+  category,
 }: InputGetProduct): Promise<OutputGetProduct> {
-  const result = await fetchDummyProducts({ limit: limit, skip: page });
+  const result = await fetchDummyProducts({ category, limit, skip: page });
 
   return {
     products: result.products.map(mapProduct) ?? [],

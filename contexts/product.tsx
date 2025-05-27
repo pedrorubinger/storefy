@@ -1,16 +1,24 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useState } from "react";
 
-import { getProductsUseCase } from "@/domain/getProductsUseCase";
-import { Product } from "@/models/Product";
+import { useFetchCategories } from "@/hooks/useFetchCategories";
+import { FetchProductsParams, useFetchProduct } from "@/hooks/useFetchProduct";
+import { Product, ProductCategory } from "@/models/Product";
+import { FetchProductsMetadata } from "@/services/api/products/dtos";
 
 interface ProductContextType {
   products: Product[];
+  categories: ProductCategory[];
   selectedProduct: Product | null;
   error: string | null;
   isFetchingProducts: boolean;
+  isFetchingCategories: boolean;
+  isFetching: boolean;
   meta: FetchProductsMetadata;
-  fetchProducts: () => Promise<void>;
-  selectProduct: (product: Product | null) => void;
+  selectedCategory: string | undefined;
+  fetchProducts: (params?: FetchProductsParams) => Promise<void>;
+  fetchCategories: () => Promise<void>;
+  selectProduct: (product: Product) => void;
+  selectCategory: (category?: string) => void;
 }
 
 export const ProductContext = createContext<ProductContextType | null>(null);
@@ -19,70 +27,54 @@ interface Props {
   children: React.ReactNode;
 }
 
-interface FetchProductsMetadata {
-  total: number;
-  lastId: number;
-}
-
-const DEFINITIONS = { limit: 20 };
-
 export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [meta, setMeta] = useState<FetchProductsMetadata>({
-    total: 0,
-    lastId: 0,
-  });
-  const [isFetchingProducts, setIsLoading] = useState<boolean>(false);
+  const [selectedCategory, setSelectedCategory] = useState<
+    string | undefined
+  >();
 
-  const fetchProducts = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+  const {
+    error: fetchProductsError,
+    isFetchingProducts,
+    meta,
+    products,
+    resetProducts,
+    fetchProducts,
+  } = useFetchProduct();
 
-    setMeta((prevMeta) => {
-      getProductsUseCase({
-        limit: DEFINITIONS.limit,
-        page: prevMeta.lastId,
-      })
-        .then((data) => {
-          const lastId =
-            data.products.length === data.total
-              ? prevMeta.lastId
-              : Number(data.products[data.products.length - 1].id);
-
-          setMeta((prev) => ({
-            ...prev,
-            lastId,
-            total: data.total || prev.total,
-          }));
-
-          setProducts((prev) => [...prev, ...data.products]);
-          setError(null);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setIsLoading(false);
-        });
-
-      return prevMeta;
-    });
-  }, []);
+  const {
+    categories,
+    fetchCategories,
+    isFetchingCategories,
+    error: fetchCategoriesError,
+  } = useFetchCategories();
 
   const selectProduct = (product: Product | null) =>
     setSelectedProduct(product);
 
+  const selectCategory = async (category?: string) => {
+    setSelectedCategory(category);
+    resetProducts();
+
+    await fetchProducts({ category });
+  };
+
   return (
     <ProductContext.Provider
       value={{
+        selectedCategory,
+        isFetchingCategories,
         meta,
         products,
+        categories,
         selectedProduct,
         isFetchingProducts,
-        error,
+        isFetching: isFetchingCategories || isFetchingProducts,
+        error: fetchProductsError || fetchCategoriesError,
         selectProduct,
+        selectCategory,
         fetchProducts,
+        fetchCategories,
       }}
     >
       {children}

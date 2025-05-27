@@ -1,6 +1,7 @@
 export interface FetchDummyProductParams {
-  skip: number;
-  limit: number;
+  skip?: number;
+  limit?: number;
+  category?: string;
 }
 
 export interface FetchDummyProductResponse {
@@ -55,3 +56,12 @@ export interface DummyProductDTO {
   thumbnail: string;
   images: string[];
 }
+
+export interface FetchProductsMetadata {
+  total: number;
+  lastId?: number;
+}
+
+export type DummyCategoryDTO = string;
+
+export type FetchDummyProductCategoryResponse = DummyCategoryDTO[];

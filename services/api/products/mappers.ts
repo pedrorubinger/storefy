@@ -1,5 +1,9 @@
-import { Product } from "@/models/Product";
-import { DummyProductDTO } from "@/services/api/products/dtos";
+import { capitalizeFirstLetter } from "@/helpers/string";
+import { Product, ProductCategory } from "@/models/Product";
+import {
+  DummyCategoryDTO,
+  DummyProductDTO,
+} from "@/services/api/products/dtos";
 
 export const mapProduct = (dto: DummyProductDTO): Product => {
   return {
@@ -18,4 +22,8 @@ export const mapProduct = (dto: DummyProductDTO): Product => {
     warrantyInformation: dto.warrantyInformation,
     image: dto.images[0],
   };
+};
+
+export const mapCategory = (dto: DummyCategoryDTO): ProductCategory => {
+  return { slug: dto, name: capitalizeFirstLetter(dto.split("-").join(" ")) };
 };

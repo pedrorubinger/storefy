@@ -21,17 +21,25 @@ const { colors } = getTheme();
 
 export default function HomeScreen() {
   const isMounted = useIsMounted();
-  const { products, meta, error, isFetchingProducts, fetchProducts } =
-    useProduct();
+  const {
+    products,
+    meta,
+    error,
+    selectedCategory,
+    isFetchingCategories,
+    isFetchingProducts,
+    fetchCategories,
+    fetchProducts,
+  } = useProduct();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const isLoading = isFetchingProducts || !isMounted();
+  const isLoading = isFetchingProducts || isFetchingCategories || !isMounted();
 
   const onOpenFilters = () => bottomSheetRef.current?.expand();
 
   const renderContent = useCallback(() => {
     if (error && !isLoading) {
-      return <Error onRetry={fetchProducts} />;
+      return <Error onRetry={() => fetchProducts()} />;
     }
 
     return (
@@ -84,7 +92,7 @@ export default function HomeScreen() {
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
               if (!isFetchingProducts && products.length < meta.total) {
-                fetchProducts();
+                fetchProducts({ category: selectedCategory });
               }
             }}
             onEndReachedThreshold={0.5}
@@ -96,6 +104,7 @@ export default function HomeScreen() {
   }, [
     fetchProducts,
     error,
+    selectedCategory,
     isFetchingProducts,
     isLoading,
     meta.total,
@@ -104,7 +113,8 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts]);
+    fetchCategories();
+  }, [fetchProducts, fetchCategories]);
 
   return (
     <GestureHandlerRootView style={styles.bottomSheetModalGestureHandler}>

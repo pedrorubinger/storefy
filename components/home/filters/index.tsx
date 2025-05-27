@@ -11,48 +11,36 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
+import { useProduct } from "@/hooks/useProduct";
 import { ColorName } from "@/interfaces/theme";
+import { ProductCategory } from "@/models/Product";
 
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
 }
 
-const categories = [
-  "Eletronics",
-  "Cars",
-  "Clothes",
-  "Computers",
-  "Smartphones",
-  "Kitchen",
-  "House",
-  "Sports",
-  "Shoes",
-  "Pets",
-] as const;
-
 const sortOptions = ["Rating", "Price"] as const;
 
-type Category = (typeof categories)[number];
 type SortOption = (typeof sortOptions)[number];
 
-const FilterButtons = <T extends string>({
+const FilterButtons = <T extends ProductCategory>({
   options,
   selected,
   onSelect,
 }: {
   options: readonly T[];
-  selected: T | null;
+  selected: string | null | undefined;
   onSelect: (option: T) => void;
 }) => (
   <View style={styles.bottomSheetModalFiltersContainer}>
     {options.map((option) => {
-      const isSelected = option === selected;
+      const isSelected = option.slug === selected;
       const backgroundColor: ColorName = isSelected ? "primary" : "grey300";
       const borderColor: ColorName = isSelected ? "green400" : "grey100";
 
       return (
         <Button
-          key={option}
+          key={option.slug}
           size="md"
           color="white"
           font="default500"
@@ -61,7 +49,7 @@ const FilterButtons = <T extends string>({
           borderColor={borderColor}
           onPress={() => onSelect(option)}
         >
-          {option}
+          {option.name}
         </Button>
       );
     })}
@@ -69,10 +57,13 @@ const FilterButtons = <T extends string>({
 );
 
 export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
+  const [temporaryCategory, setTemporaryCategory] = useState<
+    string | undefined
+  >();
+  const [temporaryOrder, setTemporaryOrder] = useState<string | null>(null);
+
+  const { categories, selectCategory } = useProduct();
   const snapPoints = useMemo(() => ["75%"], []);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
   const [selectedOrder, setSelectedOrder] = useState<SortOption | null>(null);
 
   const renderBackdrop = useCallback(
@@ -86,15 +77,17 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
     []
   );
 
-  const toggleSelection = <T extends string>(
-    value: T,
-    selected: T | null,
-    setter: React.Dispatch<React.SetStateAction<T | null>>
+  const toggleSelection = (
+    slug: string,
+    selected: string | null | undefined,
+    setter: React.Dispatch<React.SetStateAction<string | undefined>>
   ) => {
-    setter(selected === value ? null : value);
+    setter(selected === slug ? undefined : slug);
   };
 
   const onApply = () => {
+    selectCategory(temporaryCategory);
+    // setSelectedOrder(temporaryOrder);
     bottomSheetRef.current?.close();
   };
 
@@ -121,20 +114,20 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               <Typography font="default600" size="md" color="black">
                 Shop by category
               </Typography>
-              <FilterButtons<Category>
+              <FilterButtons<ProductCategory>
                 options={categories}
-                selected={selectedCategory}
+                selected={temporaryCategory}
                 onSelect={(category) =>
                   toggleSelection(
-                    category,
-                    selectedCategory,
-                    setSelectedCategory
+                    category.slug,
+                    temporaryCategory,
+                    setTemporaryCategory
                   )
                 }
               />
             </View>
 
-            <View style={styles.bottomSheetModalSectionContent}>
+            {/* <View style={styles.bottomSheetModalSectionContent}>
               <Typography font="default600" size="md" color="black">
                 Sort products by
               </Typography>
@@ -145,10 +138,13 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
                   toggleSelection(order, selectedOrder, setSelectedOrder)
                 }
               />
-            </View>
+            </View> */}
           </ScrollView>
 
-          <SafeAreaView style={styles.bottomSheetModalBtnContainer}>
+          <SafeAreaView
+            edges={["bottom", "left", "right"]}
+            style={styles.bottomSheetModalBtnContainer}
+          >
             <Button
               size="md"
               color="white"
@@ -156,7 +152,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               backgroundColor="primary"
               borderColor="green400"
               onPress={onApply}
-              disabled={!selectedCategory && !selectedOrder}
+              disabled={!temporaryCategory && !selectedOrder}
             >
               Apply filters
             </Button>

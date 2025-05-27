@@ -12,6 +12,8 @@ Api.interceptors.request.use((config: AxiosRequestConfig) => {
     "Content-Type": "application/json",
   };
 
+  console.log("AXIOS::::::", config?.url, config?.params);
+
   return { ...config, headers: headers as AxiosHeaders };
 });
 
