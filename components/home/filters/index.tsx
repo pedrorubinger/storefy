@@ -156,6 +156,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               backgroundColor="primary"
               borderColor="green400"
               onPress={onApply}
+              disabled={!selectedCategory && !selectedOrder}
             >
               Apply filters
             </Button>

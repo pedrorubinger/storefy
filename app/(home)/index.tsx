@@ -127,10 +127,11 @@ export default function HomeScreen() {
                   name="filter"
                   size={14}
                   style={styles.sortByIcon}
-                  color={colors.white}
+                  color={isLoading ? colors.grey500 : colors.white}
                 />
               }
               format="rounded"
+              disabled={isLoading}
               onPress={onOpenFilters}
             >
               Filters

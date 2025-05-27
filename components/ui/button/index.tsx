@@ -14,6 +14,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   borderColor?: ColorName;
   icon?: React.ReactNode;
   format?: "rounded";
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -27,28 +28,34 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   format,
   onPress,
+  disabled = false,
   ...rest
 }) => {
   const theme = useTheme();
 
+  const buttonStyles = [
+    styles.button,
+    {
+      backgroundColor: disabled
+        ? theme.colors.grey300
+        : theme.colors[backgroundColor],
+      borderColor: disabled ? theme.colors.grey500 : theme.colors[borderColor],
+      opacity: disabled ? 0.6 : 1,
+    },
+    format === "rounded" && styles.roundedBtn,
+    style,
+  ];
+
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        {
-          backgroundColor: theme.colors[backgroundColor],
-          borderColor: theme.colors[borderColor],
-        },
-        format === "rounded" && styles.roundedBtn,
-        style,
-      ]}
-      onPress={onPress}
+      style={buttonStyles}
+      onPress={disabled ? undefined : onPress}
+      disabled={disabled}
       {...rest}
     >
-      <Typography font={font} size={size} color={color}>
+      <Typography font={font} size={size} color={disabled ? "grey500" : color}>
         {children}
       </Typography>
-      {}
       {icon}
     </TouchableOpacity>
   );
