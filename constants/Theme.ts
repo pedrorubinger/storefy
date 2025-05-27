@@ -1,4 +1,4 @@
-import { ISupportedTheme } from "@/interfaces/customTheme";
+import { ISupportedTheme } from "@/interfaces/theme";
 
 export const AppTheme: ISupportedTheme = "light";
 

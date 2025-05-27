@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TextProps } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
-import { ColorName, FontName, FontSize } from "@/interfaces/customTheme";
+import { ColorName, FontName, FontSize } from "@/interfaces/theme";
 
 export interface TypographyProps {
   font?: FontName;
