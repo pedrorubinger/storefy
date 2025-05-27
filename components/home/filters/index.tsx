@@ -20,24 +20,32 @@ import { useProduct } from "@/hooks/useProduct";
 import { ColorName } from "@/interfaces/theme";
 import { ProductCategory } from "@/models/Product";
 
-interface Props {
+interface HomeFiltersProps {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
 }
+
+type FilterButtonsProps<T> = {
+  options: readonly T[];
+  selected: string | null | undefined;
+  onSelect: (option: T) => void;
+};
+
+const getButtonColors = (
+  isSelected: boolean
+): { backgroundColor: ColorName; borderColor: ColorName } => ({
+  backgroundColor: isSelected ? "primary" : "grey300",
+  borderColor: isSelected ? "green400" : "grey100",
+});
 
 const FilterButtons = <T extends ProductCategory>({
   options,
   selected,
   onSelect,
-}: {
-  options: readonly T[];
-  selected: string | null | undefined;
-  onSelect: (option: T) => void;
-}) => (
+}: FilterButtonsProps<T>) => (
   <View style={styles.bottomSheetModalFiltersContainer}>
     {options.map((option) => {
       const isSelected = option.slug === selected;
-      const backgroundColor: ColorName = isSelected ? "primary" : "grey300";
-      const borderColor: ColorName = isSelected ? "green400" : "grey100";
+      const { backgroundColor, borderColor } = getButtonColors(isSelected);
 
       return (
         <Button
@@ -57,10 +65,8 @@ const FilterButtons = <T extends ProductCategory>({
   </View>
 );
 
-export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
-  const [unsavedFilters, setUnsavedFilters] = useState<
-    FilterProductsParams | undefined
-  >();
+export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
+  const [unsavedFilters, setUnsavedFilters] = useState<FilterProductsParams>();
 
   const { categories, selectFilters } = useProduct();
   const snapPoints = useMemo(() => ["80%"], []);
@@ -76,13 +82,34 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
     []
   );
 
-  const onApply = () => {
+  const handleApply = () => {
     selectFilters(unsavedFilters);
     bottomSheetRef.current?.close();
   };
 
-  const onCancel = () => {
+  const handleCancel = () => {
     bottomSheetRef.current?.close();
+  };
+
+  const handleCategorySelect = (category: ProductCategory) => {
+    setUnsavedFilters((prev) => ({
+      ...prev,
+      category: category.slug === prev?.category ? undefined : category.slug,
+    }));
+  };
+
+  const handleSortBySelect = (sortBy: { slug: string; name: string }) => {
+    setUnsavedFilters((prev) => ({
+      ...prev,
+      sortBy: sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
+    }));
+  };
+
+  const handleOrderBySelect = (order: { slug: string; name: string }) => {
+    setUnsavedFilters((prev) => ({
+      ...prev,
+      order: order.slug === prev?.order ? undefined : order.slug,
+    }));
   };
 
   return (
@@ -107,15 +134,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               <FilterButtons<ProductCategory>
                 options={categories}
                 selected={unsavedFilters?.category}
-                onSelect={(category) =>
-                  setUnsavedFilters((prev) => ({
-                    ...prev,
-                    category:
-                      category.slug === prev?.category
-                        ? undefined
-                        : category.slug,
-                  }))
-                }
+                onSelect={handleCategorySelect}
               />
             </View>
 
@@ -126,13 +145,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               <FilterButtons
                 options={sortProductsByOptions}
                 selected={unsavedFilters?.sortBy}
-                onSelect={(sortBy) =>
-                  setUnsavedFilters((prev) => ({
-                    ...prev,
-                    sortBy:
-                      sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
-                  }))
-                }
+                onSelect={handleSortBySelect}
               />
             </View>
 
@@ -143,12 +156,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               <FilterButtons
                 options={orderProductsByOptions}
                 selected={unsavedFilters?.order}
-                onSelect={(order) =>
-                  setUnsavedFilters((prev) => ({
-                    ...prev,
-                    order: order.slug === prev?.order ? undefined : order.slug,
-                  }))
-                }
+                onSelect={handleOrderBySelect}
               />
             </View>
           </ScrollView>
@@ -163,7 +171,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               font="default500"
               backgroundColor="primary"
               borderColor="green400"
-              onPress={onApply}
+              onPress={handleApply}
               disabled={!unsavedFilters}
             >
               Apply filters
@@ -175,7 +183,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               font="default500"
               backgroundColor="white"
               borderColor="green400"
-              onPress={onCancel}
+              onPress={handleCancel}
             >
               Cancel
             </Button>
