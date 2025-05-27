@@ -81,19 +81,17 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.filterDescriptionContainer}>
-          {(selectedFilters?.sortBy || selectedFilters?.order) && (
-            <Typography font="default200" size="xs" color="grey700">
-              {!!selectedFilters?.sortBy &&
-                `Sorting by ${selectedFilters?.sortBy}`}
-              &nbsp;
-              {!!selectedFilters?.order &&
-                (selectedFilters?.order === "asc" ? (
-                  <Feather name="arrow-down" />
-                ) : (
-                  <Feather name="arrow-up" />
-                ))}
-            </Typography>
-          )}
+          <Typography font="default200" size="xs" color="grey700">
+            {!!selectedFilters?.sortBy &&
+              `Sorting by ${selectedFilters?.sortBy}`}
+            &nbsp;
+            {!!selectedFilters?.order &&
+              (selectedFilters?.order === "asc" ? (
+                <Feather name="arrow-down" />
+              ) : (
+                <Feather name="arrow-up" />
+              ))}
+          </Typography>
         </View>
 
         {isLoading && !products?.length ? (

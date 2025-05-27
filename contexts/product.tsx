@@ -1,5 +1,9 @@
 import { createContext, useState } from "react";
 
+import {
+  orderProductsByOptions,
+  sortProductsByOptions,
+} from "@/constants/product";
 import { useFetchCategories } from "@/hooks/useFetchCategories";
 import { FilterProductsParams, useFetchProduct } from "@/hooks/useFetchProduct";
 import { Product, ProductCategory } from "@/models/Product";
@@ -31,7 +35,10 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<
     FilterProductsParams | undefined
-  >();
+  >({
+    order: orderProductsByOptions[0].slug,
+    sortBy: sortProductsByOptions[0].slug,
+  });
 
   const {
     error: fetchProductsError,

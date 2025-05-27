@@ -114,14 +114,14 @@ export const HomeFilters: React.FC<HomeFiltersProps> = ({ bottomSheetRef }) => {
   const onSortBySelect = (sortBy: { slug: string; name: string }) => {
     setUnsavedFilters((prev) => ({
       ...prev,
-      sortBy: sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
+      sortBy: sortBy.slug,
     }));
   };
 
   const onOrderBySelect = (order: { slug: string; name: string }) => {
     setUnsavedFilters((prev) => ({
       ...prev,
-      order: order.slug === prev?.order ? undefined : order.slug,
+      order: order.slug,
     }));
   };
 
