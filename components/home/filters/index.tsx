@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
-import { ColorName } from "@/interfaces/Theme";
+import { ColorName } from "@/interfaces/theme";
 
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
