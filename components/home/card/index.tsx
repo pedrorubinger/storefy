@@ -1,8 +1,9 @@
 import { Link } from "expo-router";
 import React from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image, View } from "react-native";
 
 import { styles } from "@/components/home/card/styles";
+import { Card } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 
 interface CardProps {
@@ -16,11 +17,10 @@ export const HomeProductCard: React.FC<CardProps> = ({
   title,
   price,
   thumbnail,
-  onPress,
 }) => {
   return (
     <Link href="/(home)/product" asChild>
-      <TouchableOpacity onPress={onPress} style={styles.card}>
+      <Card style={styles.card}>
         <Image
           source={{ uri: thumbnail }}
           style={styles.thumbnail}
@@ -34,7 +34,7 @@ export const HomeProductCard: React.FC<CardProps> = ({
             {price}
           </Typography>
         </View>
-      </TouchableOpacity>
+      </Card>
     </Link>
   );
 };

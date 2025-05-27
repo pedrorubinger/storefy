@@ -1,15 +1,26 @@
 import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  NativeSafeAreaViewProps,
+  SafeAreaView,
+} from "react-native-safe-area-context";
 
 import { HomeHeader } from "@/components/home/header";
 import { styles } from "@/components/ui/container/styles";
 
-interface ContainerProps {
+interface ContainerProps extends NativeSafeAreaViewProps {
   children: React.ReactNode;
 }
 
-export const Container: React.FC<ContainerProps> = ({ children }) => {
-  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
+export const Container: React.FC<ContainerProps> = ({
+  children,
+  style,
+  ...rest
+}) => {
+  return (
+    <SafeAreaView style={[styles.container, style]} {...rest}>
+      {children}
+    </SafeAreaView>
+  );
 };
 
 interface ContainerContentProps {

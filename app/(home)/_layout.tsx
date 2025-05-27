@@ -9,6 +9,7 @@ export default function HomeLayout() {
         options={{
           headerShown: true,
           title: "Product details",
+          headerBackButtonDisplayMode: "minimal",
         }}
       />
     </Stack>

@@ -11,6 +11,7 @@ import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
 import { ColorName } from "@/interfaces/Theme";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
@@ -68,7 +69,7 @@ const FilterButtons = <T extends string>({
 );
 
 export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
-  const snapPoints = useMemo(() => ["70%"], []);
+  const snapPoints = useMemo(() => ["75%"], []);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
@@ -147,7 +148,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
             </View>
           </ScrollView>
 
-          <View style={styles.bottomSheetModalBtnContainer}>
+          <SafeAreaView style={styles.bottomSheetModalBtnContainer}>
             <Button
               size="md"
               color="white"
@@ -169,7 +170,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
             >
               Cancel
             </Button>
-          </View>
+          </SafeAreaView>
         </View>
       </BottomSheetView>
     </BottomSheet>

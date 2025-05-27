@@ -22,11 +22,9 @@ export const styles = StyleSheet.create({
   bottomSheetModalScroll: {
     paddingHorizontal: spacing.md,
     paddingTop: spacing.md,
-    paddingBottom: spacing.lg,
   },
   bottomSheetModalBtnContainer: {
     padding: spacing.md,
-    marginBottom: spacing.lg,
     gap: spacing.md,
   },
   bottomSheetModalIndicator: { display: "none" },
