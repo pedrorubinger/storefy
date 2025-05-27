@@ -20,7 +20,7 @@ const { colors } = getTheme();
 
 export default function HomeScreen() {
   const isMounted = useIsMounted();
-  const { products, isFetchingProducts, fetchProducts } = useProduct();
+  const { products, meta, isFetchingProducts, fetchProducts } = useProduct();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const isLoading = isFetchingProducts || !isMounted();
@@ -68,19 +68,26 @@ export default function HomeScreen() {
             </Button>
           </View>
 
-          {isLoading ? (
+          {isLoading && !products?.length ? (
             <ScrollView showsVerticalScrollIndicator={false}>
               <HomeLoader />
             </ScrollView>
           ) : (
             <FlatList
               data={products}
-              keyExtractor={(item) => String(item.id)}
+              keyExtractor={(item) => item.id}
               contentContainerStyle={styles.productsList}
               renderItem={({ item }) => <HomeProductCard product={item} />}
               numColumns={2}
               columnWrapperStyle={styles.productListColumnWrapper}
               showsVerticalScrollIndicator={false}
+              onEndReached={() => {
+                if (!isFetchingProducts && products.length < meta.total) {
+                  fetchProducts();
+                }
+              }}
+              onEndReachedThreshold={0.5}
+              ListFooterComponent={isLoading ? <HomeLoader /> : null}
             />
           )}
         </ContainerContent>

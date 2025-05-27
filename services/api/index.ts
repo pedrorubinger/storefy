@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import Axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 
 import { handleError } from "@/helpers/errors";

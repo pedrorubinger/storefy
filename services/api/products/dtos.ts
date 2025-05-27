@@ -1,3 +1,8 @@
+export interface FetchDummyProductParams {
+  skip: number;
+  limit: number;
+}
+
 export interface FetchDummyProductResponse {
   products: DummyProductDTO[];
   total: number;

@@ -8,6 +8,7 @@ interface ProductContextType {
   selectedProduct: Product | null;
   error: string | null;
   isFetchingProducts: boolean;
+  meta: FetchProductsMetadata;
   fetchProducts: () => Promise<void>;
   selectProduct: (product: Product | null) => void;
 }
@@ -18,22 +19,56 @@ interface Props {
   children: React.ReactNode;
 }
 
+interface FetchProductsMetadata {
+  total: number;
+  lastId: number;
+}
+
+const DEFINITIONS = { limit: 20 };
+
 export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [meta, setMeta] = useState<FetchProductsMetadata>({
+    total: 0,
+    lastId: 0,
+  });
   const [isFetchingProducts, setIsLoading] = useState<boolean>(false);
 
   const fetchProducts = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+
     try {
-      setIsLoading(true);
+      setMeta((prevMeta) => {
+        getProductsUseCase({
+          limit: DEFINITIONS.limit,
+          page: prevMeta.lastId,
+        })
+          .then((data) => {
+            const lastId =
+              data.products.length === data.total
+                ? prevMeta.lastId
+                : Number(data.products[data.products.length - 1].id);
 
-      const data = await getProductsUseCase();
+            setMeta((prev) => ({
+              ...prev,
+              lastId,
+              total: data.total || prev.total,
+            }));
+            setProducts((prev) => [...prev, ...data.products]);
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setError("Failed to fetch products");
+            setIsLoading(false);
+          });
 
-      setProducts(data);
+        return prevMeta;
+      });
     } catch {
       setError("Failed to fetch products");
-    } finally {
       setIsLoading(false);
     }
   }, []);
@@ -44,6 +79,7 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
+        meta,
         products,
         selectedProduct,
         isFetchingProducts,

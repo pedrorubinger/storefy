@@ -3,7 +3,7 @@ import { DummyProductDTO } from "@/services/api/products/dtos";
 
 export const mapProduct = (dto: DummyProductDTO): Product => {
   return {
-    id: dto.id,
+    id: String(dto.id),
     availabilityStatus: dto.availabilityStatus,
     brand: dto.brand,
     category: dto.category,
