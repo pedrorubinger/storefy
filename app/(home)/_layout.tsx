@@ -1,6 +1,7 @@
-import { getTheme } from "@/constants/Theme";
 import { Stack } from "expo-router";
 import React from "react";
+
+import { getTheme } from "@/constants/Theme";
 
 const { colors } = getTheme();
 
@@ -11,9 +12,9 @@ export default function HomeLayout() {
         name="product"
         options={{
           headerShown: true,
+          headerTintColor: colors.primary,
           title: "Product details",
           headerBackButtonDisplayMode: "minimal",
-          headerTintColor: colors.primary,
         }}
       />
     </Stack>
