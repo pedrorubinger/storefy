@@ -4,12 +4,11 @@ import { mapProduct } from "@/services/api/products/mappers";
 
 interface OutputGetProduct {
   products: Product[];
-  page: number;
   total: number;
 }
 
 interface InputGetProduct {
-  page?: number;
+  skip?: number;
   limit?: number;
   category?: string;
   sortBy?: string;
@@ -18,7 +17,7 @@ interface InputGetProduct {
 
 export async function getProductsUseCase({
   limit,
-  page,
+  skip,
   category,
   sortBy,
   order,
@@ -28,12 +27,11 @@ export async function getProductsUseCase({
     limit,
     sortBy,
     order,
-    skip: page,
+    skip,
   });
 
   return {
     products: result.products.map(mapProduct) ?? [],
-    page: result.skip,
     total: result.total,
   };
 }

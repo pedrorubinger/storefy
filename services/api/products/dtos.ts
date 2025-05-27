@@ -61,7 +61,7 @@ export interface DummyProductDTO {
 
 export interface FetchProductsMetadata {
   total: number;
-  lastId?: number;
+  skip: number;
 }
 
 export type DummyCategoryDTO = string;

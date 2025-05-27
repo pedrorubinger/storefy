@@ -7,7 +7,7 @@ import { FetchProductsMetadata } from "@/services/api/products/dtos";
 const DEFINITIONS = {
   limit: 10,
   initialProducts: [],
-  initialMeta: { total: 0, lastId: 0 },
+  initialMeta: { total: 0, skip: 0 },
 };
 
 export interface FilterProductsParams {
@@ -28,36 +28,39 @@ export const useFetchProduct = () => {
     setIsFetchingProducts(true);
     setError(null);
 
-    setMeta((prevMeta) => {
-      getProductsUseCase({
-        limit: params?.category ? undefined : DEFINITIONS.limit,
-        page: params?.category ? undefined : prevMeta.lastId,
-        category: params?.category,
-        sortBy: params?.sortBy,
-        order: params?.order,
-      })
-        .then((data) => {
-          const lastId =
-            data.products.length === data.total && !data
-              ? prevMeta.lastId
-              : Number(data.products[data.products.length - 1]?.id);
+    try {
+      setMeta((prevMeta) => {
+        const currentSkip = prevMeta.skip;
+        const limit = DEFINITIONS.limit;
 
-          setMeta((prev) => ({
-            ...prev,
-            lastId: params?.category ? undefined : lastId,
-            total: data.total || prev.total,
-          }));
-
-          setProducts((prev) => [...prev, ...data.products]);
-          setIsFetchingProducts(false);
+        getProductsUseCase({
+          limit,
+          skip: currentSkip,
+          category: params?.category,
+          sortBy: params?.sortBy,
+          order: params?.order,
         })
-        .catch((err) => {
-          setError(err.message);
-          setIsFetchingProducts(false);
-        });
+          .then((data) => {
+            setProducts((prev) => [...prev, ...data.products]);
 
-      return prevMeta;
-    });
+            setMeta((prev) => ({
+              ...prev,
+              total: data.total,
+              skip: prev.skip + data.products.length,
+            }));
+          })
+          .catch((err) => {
+            setError(err.message);
+          })
+          .finally(() => {
+            setIsFetchingProducts(false);
+          });
+        return prevMeta;
+      });
+    } catch (err: any) {
+      setError(err.message);
+      setIsFetchingProducts(false);
+    }
   }, []);
 
   const resetProducts = () => {

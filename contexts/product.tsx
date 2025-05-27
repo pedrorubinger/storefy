@@ -50,10 +50,10 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
   } = useFetchProduct();
 
   const {
-    categories,
-    fetchCategories,
-    isFetchingCategories,
     error: fetchCategoriesError,
+    categories,
+    isFetchingCategories,
+    fetchCategories,
   } = useFetchCategories();
 
   const selectProduct = (product: Product | null) =>
