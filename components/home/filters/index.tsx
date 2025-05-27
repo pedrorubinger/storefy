@@ -11,6 +11,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "@/components/home/filters/styles";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
+import { sortProductsByOptions } from "@/constants/product";
+import { FetchProductsParams } from "@/hooks/useFetchProduct";
 import { useProduct } from "@/hooks/useProduct";
 import { ColorName } from "@/interfaces/theme";
 import { ProductCategory } from "@/models/Product";
@@ -18,10 +20,6 @@ import { ProductCategory } from "@/models/Product";
 interface Props {
   bottomSheetRef: React.RefObject<BottomSheetMethods | null>;
 }
-
-const sortOptions = ["Rating", "Price"] as const;
-
-type SortOption = (typeof sortOptions)[number];
 
 const FilterButtons = <T extends ProductCategory>({
   options,
@@ -57,14 +55,12 @@ const FilterButtons = <T extends ProductCategory>({
 );
 
 export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
-  const [temporaryCategory, setTemporaryCategory] = useState<
-    string | undefined
+  const [unsavedFilters, setUnsavedFilters] = useState<
+    FetchProductsParams | undefined
   >();
-  const [temporaryOrder, setTemporaryOrder] = useState<string | null>(null);
 
-  const { categories, selectCategory } = useProduct();
+  const { categories, selectFilters } = useProduct();
   const snapPoints = useMemo(() => ["75%"], []);
-  const [selectedOrder, setSelectedOrder] = useState<SortOption | null>(null);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetDefaultBackdropProps) => (
@@ -77,17 +73,8 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
     []
   );
 
-  const toggleSelection = (
-    slug: string,
-    selected: string | null | undefined,
-    setter: React.Dispatch<React.SetStateAction<string | undefined>>
-  ) => {
-    setter(selected === slug ? undefined : slug);
-  };
-
   const onApply = () => {
-    selectCategory(temporaryCategory);
-    // setSelectedOrder(temporaryOrder);
+    selectFilters(unsavedFilters);
     bottomSheetRef.current?.close();
   };
 
@@ -116,29 +103,35 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               </Typography>
               <FilterButtons<ProductCategory>
                 options={categories}
-                selected={temporaryCategory}
+                selected={unsavedFilters?.category}
                 onSelect={(category) =>
-                  toggleSelection(
-                    category.slug,
-                    temporaryCategory,
-                    setTemporaryCategory
-                  )
+                  setUnsavedFilters((prev) => ({
+                    ...prev,
+                    category:
+                      category.slug === prev?.category
+                        ? undefined
+                        : category.slug,
+                  }))
                 }
               />
             </View>
 
-            {/* <View style={styles.bottomSheetModalSectionContent}>
+            <View style={styles.bottomSheetModalSectionContent}>
               <Typography font="default600" size="md" color="black">
                 Sort products by
               </Typography>
-              <FilterButtons<SortOption>
-                options={sortOptions}
-                selected={selectedOrder}
-                onSelect={(order) =>
-                  toggleSelection(order, selectedOrder, setSelectedOrder)
+              <FilterButtons
+                options={sortProductsByOptions}
+                selected={unsavedFilters?.sortBy}
+                onSelect={(sortBy) =>
+                  setUnsavedFilters((prev) => ({
+                    ...prev,
+                    sortBy:
+                      sortBy.slug === prev?.sortBy ? undefined : sortBy.slug,
+                  }))
                 }
               />
-            </View> */}
+            </View>
           </ScrollView>
 
           <SafeAreaView
@@ -152,7 +145,7 @@ export const HomeFilters: React.FC<Props> = ({ bottomSheetRef }) => {
               backgroundColor="primary"
               borderColor="green400"
               onPress={onApply}
-              disabled={!temporaryCategory && !selectedOrder}
+              disabled={!unsavedFilters}
             >
               Apply filters
             </Button>

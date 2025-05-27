@@ -12,6 +12,7 @@ const DEFINITIONS = {
 
 export interface FetchProductsParams {
   category?: string;
+  sortBy?: string;
 }
 
 export const useFetchProduct = () => {
@@ -31,6 +32,7 @@ export const useFetchProduct = () => {
         limit: params?.category ? undefined : DEFINITIONS.limit,
         page: params?.category ? undefined : prevMeta.lastId,
         category: params?.category,
+        sortBy: params?.sortBy,
       })
         .then((data) => {
           const lastId =
@@ -48,7 +50,6 @@ export const useFetchProduct = () => {
           setIsFetchingProducts(false);
         })
         .catch((err) => {
-          console.log("ERROR::::::", err);
           setError(err.message);
           setIsFetchingProducts(false);
         });

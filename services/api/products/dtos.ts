@@ -2,6 +2,7 @@ export interface FetchDummyProductParams {
   skip?: number;
   limit?: number;
   category?: string;
+  sortBy?: string;
 }
 
 export interface FetchDummyProductResponse {

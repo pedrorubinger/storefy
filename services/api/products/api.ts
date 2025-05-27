@@ -9,11 +9,12 @@ export const fetchDummyProducts = async ({
   limit,
   skip,
   category,
+  sortBy,
 }: FetchDummyProductParams): Promise<FetchDummyProductResponse> => {
   const { data } = await Api.get<FetchDummyProductResponse>(
     category ? `/products/category/${category}` : "/products",
     {
-      params: { skip, limit },
+      params: { skip, limit, sortBy, order: "desc" },
     }
   );
 

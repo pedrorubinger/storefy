@@ -14,11 +14,11 @@ interface ProductContextType {
   isFetchingCategories: boolean;
   isFetching: boolean;
   meta: FetchProductsMetadata;
-  selectedCategory: string | undefined;
+  selectedFilters: FetchProductsParams | undefined;
   fetchProducts: (params?: FetchProductsParams) => Promise<void>;
   fetchCategories: () => Promise<void>;
   selectProduct: (product: Product) => void;
-  selectCategory: (category?: string) => void;
+  selectFilters: (filters?: FetchProductsParams) => void;
 }
 
 export const ProductContext = createContext<ProductContextType | null>(null);
@@ -29,8 +29,8 @@ interface Props {
 
 export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<
-    string | undefined
+  const [selectedFilters, setSelectedFilters] = useState<
+    FetchProductsParams | undefined
   >();
 
   const {
@@ -52,17 +52,20 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
   const selectProduct = (product: Product | null) =>
     setSelectedProduct(product);
 
-  const selectCategory = async (category?: string) => {
-    setSelectedCategory(category);
+  const selectFilters = async (params?: FetchProductsParams) => {
+    const category = params?.category;
+    const sortBy = params?.sortBy;
+
+    setSelectedFilters({ category, sortBy });
     resetProducts();
 
-    await fetchProducts({ category });
+    await fetchProducts({ category, sortBy });
   };
 
   return (
     <ProductContext.Provider
       value={{
-        selectedCategory,
+        selectedFilters,
         isFetchingCategories,
         meta,
         products,
@@ -72,7 +75,7 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
         isFetching: isFetchingCategories || isFetchingProducts,
         error: fetchProductsError || fetchCategoriesError,
         selectProduct,
-        selectCategory,
+        selectFilters,
         fetchProducts,
         fetchCategories,
       }}

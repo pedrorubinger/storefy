@@ -12,14 +12,21 @@ interface InputGetProduct {
   page?: number;
   limit?: number;
   category?: string;
+  sortBy?: string;
 }
 
 export async function getProductsUseCase({
   limit,
   page,
   category,
+  sortBy,
 }: InputGetProduct): Promise<OutputGetProduct> {
-  const result = await fetchDummyProducts({ category, limit, skip: page });
+  const result = await fetchDummyProducts({
+    category,
+    limit,
+    sortBy,
+    skip: page,
+  });
 
   return {
     products: result.products.map(mapProduct) ?? [],
