@@ -101,7 +101,7 @@ export default function HomeScreen() {
         ) : (
           <FlatList
             data={products}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.productsList}
             renderItem={({ item }) => <HomeProductCard product={item} />}
             numColumns={2}

@@ -14,7 +14,7 @@ interface CardProps {
   product: Product;
 }
 
-export const HomeProductCard: React.FC<CardProps> = ({ product }) => {
+export const HomeProductCardComponent: React.FC<CardProps> = ({ product }) => {
   const { selectProduct } = useProduct();
   const router = useRouter();
 
@@ -47,3 +47,13 @@ export const HomeProductCard: React.FC<CardProps> = ({ product }) => {
     </Card>
   );
 };
+
+export const HomeProductCard = React.memo(
+  HomeProductCardComponent,
+  (prevProps, nextProps) =>
+    prevProps.product.id === nextProps.product.id &&
+    prevProps.product.price === nextProps.product.price &&
+    prevProps.product.rating === nextProps.product.rating &&
+    prevProps.product.title === nextProps.product.title &&
+    prevProps.product.thumbnail === nextProps.product.thumbnail
+);
