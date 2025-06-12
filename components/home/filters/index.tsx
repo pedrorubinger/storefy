@@ -5,7 +5,8 @@ import BottomSheet, {
 import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useCallback, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { styles } from "@/components/home/filters/styles";
